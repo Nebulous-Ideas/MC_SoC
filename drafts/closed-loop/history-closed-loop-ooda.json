@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "history-closed-loop-ooda",
+  "source": {
+    "kind": "history",
+    "system": "chat",
+    "ref": "https://en.wikipedia.org/wiki/Control_theory",
+    "observed_at": "2026-11-25T22:30:00-07:00"
+  },
+  "what_happened": "An open loop acts and never checks the result; a closed loop measures the result, compares it with what was wanted and feeds the gap back. A thermostat is the plain example. The observe-orient-decide-act loop applies the same feedback shape to decisions under pressure, with its author stressing that the orient step shapes everything else. The comparison is an analogy made here, not a claim from a source: the OODA loop is a model of decisions in conflict, not a piece of control theory. In security operations the loop is the shift, and the review afterwards is where it closes. This project is built as a closed loop: incidents and chosen news become lessons, lessons become drafts, checks run, a person signs before anything is published, and what comes back as feedback is counted, never obeyed. The sources below are secondary and a person should check the wording before sign-off.",
+  "lesson": "Close the loop: measure what your action did and feed the gap back, or you are pushing and hoping. Tune the middle step, where you place what you see, and keep a person in the loop wherever a wrong act costs too much.",
+  "tags": [
+    "closed-loop",
+    "feedback",
+    "ooda",
+    "control",
+    "security"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "Open-loop control acts independently of the measured output (an example is a boiler on a timer); closed-loop, or feedback, control measures the output, compares it with a set point and adjusts, as a thermostat does (secondary: an encyclopedia article)",
+      "ref": "https://en.wikipedia.org/wiki/Control_theory"
+    },
+    {
+      "claim": "The OODA loop (observe, orient, decide, act) is a decision model made by a US Air Force strategist from studying fighter-pilot combat; in its full diagram Orient feeds the other steps and an implicit channel runs from Orient to Act (secondary: an encyclopedia article)",
+      "ref": "https://en.wikipedia.org/wiki/OODA_loop"
+    },
+    {
+      "claim": "Explainers on the loop stress that orientation, not raw speed, is the centre of the model (secondary: a practitioner site)",
+      "ref": "https://oodaloop.com/the-ooda-loop-explained-the-real-story-about-the-ultimate-model-for-decision-making-in-competitive-environments/"
+    }
+  ],
+  "redaction": {
+    "status": "pending"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}
