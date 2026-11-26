@@ -1,0 +1,21 @@
+# Example systemd unit; copy to /etc/systemd/system/rap-voice.service, edit the paths, then:
+#   systemctl daemon-reload && systemctl enable --now rap-voice
+[Unit]
+Description=Rap voice proxy in front of the speech server
+After=network-online.target
+
+[Service]
+User=youruser
+WorkingDirectory=/path/to/MC_SoC/compose
+Environment=SPEECH_URL=http://your-speech-server:8000
+Environment=RAP_VOICE_CONFIG=/path/to/rap.json
+Environment=RAP_HOST=192.0.2.10
+Environment=RAP_PORT=8010
+ExecStart=/usr/bin/python3 -I rap_voice.py
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target

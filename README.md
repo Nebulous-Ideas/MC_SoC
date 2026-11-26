@@ -82,6 +82,7 @@ One incident, one derived work, one page, end to end: [docs/EXAMPLE.md](docs/EXA
 - `persona.py`, `personas/` persona cards (voice and beat kinds) built from any feature table of tracks or of voices (traits only, no names)
 - `discord_card.py` Discord review surface logic (card plus button handling); fake-tested, no transport yet
 - `decide.py` Decide stage: read-only brief per approved lesson (candidate forms, fitting voice cards, unranked beat cards); a person chooses
+- `incident/casestate.py`, `incident/sources.py` an incident case state for agents that enrich and hunt live (sources with trust, an expansion gate a person must open, a query budget, a re-orientation diff) and read-only Graylog and InfluxDB transports with a hunt loop; fake-tested only
 - `compose/` the composition tools (lint, render, measure, QA, rhyme) and the Act engine adapter over them; not stdlib-only, see `compose/README.md`
 - `act.py` Act seam: checks a person's pick against the brief, asks an engine adapter for numbers, reports inside/below/above the voice card's bands; generate-only, fake-tested
 - `exchange.py`, `exchange/` numbers-only bundles contributed by pull request (crates of 2 to 8 sides, cards, prescriptions) and their checker; `crate_builder.py` computes a crate from a feature table; see `CONTRIBUTING.md`

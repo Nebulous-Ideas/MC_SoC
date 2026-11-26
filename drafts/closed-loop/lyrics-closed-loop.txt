@@ -1,0 +1,64 @@
+[Verse 1 - open and closed]
+@voice am_michael
+(slot 4)
+An open loop just pushes and hopes,
+It never checks how the thing copes.
+A closed loop looks at what it made,
+And feeds the gap back, then it's weighed.
+
+[Verse 2 - four steps]
+@voice af_heart
+(slot 4)
+Observe, orient, decide, and act,
+A loop for choices, and that's a fact.
+Orient is the middle part,
+It shapes what you see before you start.
+
+[Hook]
+@voice bm_george
+(slot auto)
+Loop it back, loop it back,
+Look at the result, then react,
+Feed it in and go again,
+That is how the good ones win.
+
+[Verse 3 - the thermostat]
+@voice am_michael
+(slot 4)
+A thermostat holds a number in mind,
+It senses the room, and the gap it finds
+Tells the heater to push or to stay,
+Then senses again, all night, all day.
+
+[Verse 4 - this project]
+@voice af_heart
+(slot 4)
+An incident or news comes in,
+We boil it to a lesson within.
+A draft gets made and the checks are run,
+A person signs before it's done.
+Then what comes back is counts, not commands,
+And what we learn goes back in our hands.
+
+[Verse 5 - the night shift]
+@voice am_michael
+(slot 4)
+In security the loop is the night,
+Spot it, answer, make it right.
+The review after is where it ends,
+Or the same mistake comes back again.
+
+[Hook - last time]
+@voice bm_george
+Loop it back, loop it back,
+Look at the result, then react,
+Feed it in and go again,
+That is how the good ones win.
+Fast is fine and aim is better,
+Check it twice and tie it together.
+
+[Outro]
+@voice af_heart
+(slot 4)
+Look, place it, choose, and act,
+Check what came back.
