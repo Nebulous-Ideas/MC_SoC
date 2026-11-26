@@ -100,13 +100,14 @@ def hunt(case, search, indicators, field_map, since_s=3600, limit=50, source_nam
         if not rows:
             continue
         case.observe(ind.get("kind", "ioc"), v, source_name, "system")
-        items = []
+        items, seen = [], set()
         for row in rows:
             system = next((str(row[f]) for f, k in field_map.items() if k == "host" and HOST.match(str(row.get(f, "")))), None)
             for f, k in field_map.items():
                 val = str(row.get(f, ""))
                 ok = HOST.match(val) if k == "host" else valid_ioc(val)
-                if ok and val != v:
+                if ok and val != v and (k, val) not in seen:
+                    seen.add((k, val))
                     items.append({"kind": k, "value": val, "system": system if k != "host" else val, "source": source_name, "trust": "system"})
         if items:
             p = case.propose(items)

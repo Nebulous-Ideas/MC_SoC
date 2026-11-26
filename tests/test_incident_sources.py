@@ -82,6 +82,13 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(q["query"]["query_string"], '"203.0.113.7"'); self.assertEqual(q["search_types"][0]["limit"], 5)
         self.assertEqual(q["timerange"], {"type": "relative", "range": 3600})
 
+    def test_hunt_counts_a_repeated_value_once(self):
+        c = case()
+        rows = [{"source": "web-1", "dest_ip": "203.0.113.50"} for _ in range(20)]
+        out = S.hunt(c, lambda q, s, l: rows, [{"kind": "ioc", "value": "203.0.113.7"}], {"source": "host", "dest_ip": "ioc"})
+        self.assertEqual(out["pending"], [])
+        self.assertTrue(any(f.value == "203.0.113.50" for f in c.facts.values()))
+
     def test_example_field_map_only_uses_known_kinds(self):
         self.assertTrue(set(S.EXAMPLE_GRAYLOG_FIELD_MAP.values()) <= {"host", "ioc"})
 
