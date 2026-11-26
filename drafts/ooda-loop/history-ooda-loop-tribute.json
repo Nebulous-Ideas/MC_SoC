@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "history-ooda-loop-tribute",
+  "source": {
+    "kind": "history",
+    "system": "chat",
+    "ref": "https://en.wikipedia.org/wiki/OODA_loop",
+    "observed_at": "2026-11-25T22:00:00-07:00"
+  },
+  "what_happened": "The observe-orient-decide-act loop is a model of how people act under pressure: look, place what you see in your own picture of the world, choose, act, then look again. Its author stressed that the orient step shapes everything else, because habits, training and expectations decide what you notice, and that experts can skip the explicit decide step by acting on trained instinct. A thermostat is a much simpler cousin with the same sense, compare, act shape; that comparison is an analogy made here, not a claim from a source, and the loop is a model of decisions in conflict, not a piece of control theory. In security operations, playbooks are one way to store what experienced people know so a quick response lands in the right place. This project runs a loop of its own (sense, draft, act, check, learn) with a person signing before anything is published. The sources below are secondary and a person should check the wording before sign-off.",
+  "lesson": "A fast loop only wins if the middle step is tuned: how you place what you see decides what you notice and what you do. The same look, compare, act shape runs in simple controls and in security work, so tune the middle, keep what the old hands know in writing, and keep a person in the loop where a wrong act costs too much.",
+  "tags": [
+    "ooda",
+    "feedback",
+    "control",
+    "security",
+    "decision-making"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "The OODA loop (observe, orient, decide, act) is a decision model made by a US Air Force strategist from studying fighter-pilot combat; in its full diagram Orient feeds the other steps and an implicit channel runs from Orient to Act, skipping Decide (secondary: an encyclopedia article)",
+      "ref": "https://en.wikipedia.org/wiki/OODA_loop"
+    },
+    {
+      "claim": "Explainers on the loop stress that orientation, not raw speed, is the centre of the model (secondary: a practitioner site)",
+      "ref": "https://oodaloop.com/the-ooda-loop-explained-the-real-story-about-the-ultimate-model-for-decision-making-in-competitive-environments/"
+    }
+  ],
+  "redaction": {
+    "status": "pending"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}
