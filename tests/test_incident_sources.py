@@ -57,20 +57,30 @@ class HuntTests(unittest.TestCase):
         S.hunt(cs, gl, [{"kind": "ioc", "value": "203.0.113.7"}], MAP, limit=10)
         self.assertEqual(gl.queries[0][2], 10)
 
+class CheckTests(unittest.TestCase):
+    def test_check_reports_field_names_only(self):
+        from incident import check_graylog as C
+        out = C.check(lambda q, s, l: [{"source": "web-1", "secret_field": "SHOULD-NOT-APPEAR"}])
+        self.assertEqual(out, {"rows": 1, "fields": ["secret_field", "source"]}); self.assertNotIn("SHOULD-NOT-APPEAR", str(out))
+
 class TransportTests(unittest.TestCase):
-    def test_graylog_request_is_read_only_and_the_token_is_not_logged_or_in_the_url(self):
+    def test_graylog_request_is_one_read_only_post_and_the_token_is_not_in_the_url_or_body(self):
         sent = {}
         def fake_urlopen(req, timeout=0):
-            sent.update(url=req.full_url, method=req.get_method(), headers=dict(req.header_items()), body=req.data)
+            sent.update(url=req.full_url, method=req.get_method(), headers={k.lower(): v for k, v in req.header_items()}, body=req.data.decode())
             class R:
-                def read(self): return json.dumps({"messages": [{"message": {"source": "web-1", "src_ip": "203.0.113.50"}}]}).encode()
+                def read(self): return json.dumps({"results": {"q1": {"search_types": {"st1": {"messages": [{"message": {"source": "web-1", "src_ip": "203.0.113.50"}}]}}}}}).encode()
                 def __enter__(s): return s
                 def __exit__(s, *a): pass
             return R()
         t = S.graylog_transport("https://graylog.example.org", "TOKEN123", opener=fake_urlopen)
         rows = t('"203.0.113.7"', 3600, 5)
-        self.assertEqual(rows, [{"source": "web-1", "src_ip": "203.0.113.50"}]); self.assertNotIn("TOKEN123", sent["url"])
-        self.assertTrue(sent["url"].startswith("https://graylog.example.org/api/")); self.assertIn("X-requested-by", {k.capitalize() if False else k for k in sent["headers"]} | {"X-requested-by"})
+        self.assertEqual(rows, [{"source": "web-1", "src_ip": "203.0.113.50"}])
+        self.assertEqual(sent["method"], "POST"); self.assertTrue(sent["url"].startswith("https://graylog.example.org/api/views/search/sync"))
+        self.assertNotIn("TOKEN123", sent["url"] + sent["body"]); self.assertEqual(sent["headers"]["x-requested-by"], "mc-soc-hunt")
+        body = json.loads(sent["body"]); q = body["queries"][0]
+        self.assertEqual(q["query"]["query_string"], '"203.0.113.7"'); self.assertEqual(q["search_types"][0]["limit"], 5)
+        self.assertEqual(q["timerange"], {"type": "relative", "range": 3600})
 
     def test_influx_flux_is_built_from_a_template_with_a_validated_value_only(self):
         seen = {}

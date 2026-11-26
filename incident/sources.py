@@ -6,9 +6,10 @@ free text), keeps only validated field values from the rows (never message bodie
 gate, so anything outside scope or over the limits waits for a person.
 
 Credentials come from the caller (read them from environment variables yourself); nothing here reads or stores them, and they are only
-placed in the request headers. The transports are plain urllib, stdlib only. Fake-tested only: the Graylog transport uses the legacy
-`/api/search/universal/relative` endpoint, which newer Graylog versions may have removed (check your version's API browser and swap in the
-views search API if so); the InfluxDB transport posts Flux to `/api/v2/query`. Neither has been run against a real server.
+placed in the request headers. The transports are plain urllib, stdlib only. Fake-tested only: the Graylog transport posts to the views
+search API (`/api/views/search/sync`), because the legacy `/api/search/universal/...` endpoints are gone in current versions; its body
+and response shapes come from community examples and must be checked against your server's REST API browser. The InfluxDB transport posts
+Flux to `/api/v2/query`. Neither has been run against a real server.
 """
 import base64, csv, io, ipaddress, json, re, urllib.parse, urllib.request
 
@@ -29,17 +30,36 @@ def valid_ioc(value):
     return bool(DOMAIN.match(value) or HASH.match(value))
 
 
-def graylog_transport(base_url, token, opener=urllib.request.urlopen, timeout=30):
-    """search(query, since_s, limit) -> list of message field dicts. A read-only GET; the token goes only in the Authorization header."""
+def graylog_search_body(query, since_s, limit):
+    """The views-search body for a relative time range and one message table. Built from community examples of POST /api/views/search/sync;
+    check it against your server's REST API browser (System > REST API Browser) before trusting it, since field names have moved between versions."""
+    return {"queries": [{"id": "q1", "query": {"type": "elasticsearch", "query_string": query},
+                         "timerange": {"type": "relative", "range": int(since_s)},
+                         "search_types": [{"id": "st1", "type": "messages", "limit": int(limit), "offset": 0,
+                                           "timerange": None, "query": None, "streams": []}]}]}
+
+
+def graylog_rows(response):
+    """Message field dicts from a views-search response: results -> query -> search_types -> message table -> messages."""
+    rows = []
+    for q in (response.get("results") or {}).values():
+        for st in (q.get("search_types") or {}).values():
+            rows += [m.get("message", {}) for m in st.get("messages", [])]
+    return rows
+
+
+def graylog_transport(base_url, token, opener=urllib.request.urlopen, timeout=60):
+    """search(query, since_s, limit) -> list of message field dicts, through the views search API (Graylog 5 to 7). One POST that only
+    reads; the token goes only in the Authorization header (HTTP basic with the token as the user name), never in the URL or a log."""
     auth = "Basic " + base64.b64encode(f"{token}:token".encode()).decode()
 
     def search(query, since_s, limit):
-        qs = urllib.parse.urlencode({"query": query, "range": int(since_s), "limit": int(limit)})
-        req = urllib.request.Request(f"{base_url.rstrip('/')}/api/search/universal/relative?{qs}", method="GET",
-                                     headers={"Authorization": auth, "Accept": "application/json", "X-Requested-By": "mc-soc-hunt"})
+        body = json.dumps(graylog_search_body(query, since_s, limit)).encode()
+        req = urllib.request.Request(f"{base_url.rstrip('/')}/api/views/search/sync?timeout={int(timeout) * 1000}", data=body, method="POST",
+                                     headers={"Authorization": auth, "Accept": "application/json", "Content-Type": "application/json",
+                                              "X-Requested-By": "mc-soc-hunt"})
         with opener(req, timeout=timeout) as r:
-            data = json.loads(r.read())
-        return [m.get("message", {}) for m in data.get("messages", [])][:limit]
+            return graylog_rows(json.loads(r.read()))[:limit]
     return search
 
 
