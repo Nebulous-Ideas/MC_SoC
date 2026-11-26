@@ -21,7 +21,7 @@ And write down what is false or true.
 [Hook]
 @voice bm_george
 (slot auto)
-Same words, but different jobs,
+One word, two different jobs,
 One builds it, one attests,
 One keeps the system running,
 One tests what the first one guessed.
@@ -29,36 +29,36 @@ One tests what the first one guessed.
 [Verse 3 - snapshot and window]
 @voice af_heart
 (slot 4)
-Type one is a photograph,
-The design on a single day.
-Type two is a window of months,
+The photograph is type one,
+Design on a single day.
+The window is type two,
 Did it work the whole way?
-Missed a review in the spring?
+If a review got skipped,
 That goes down as a line.
-Writing it up honestly
-Is how the thing stays fine.
+Own it in the report,
+That is how the thing stays fine.
 
 [Verse 4 - the wall in the middle]
 @voice am_michael
 (slot 4)
-The auditor can't build my stack,
-Then sign that it is sound.
-They stand outside and judge it,
-So the trust can be found.
+The auditor can't run my stack
+Or make my calls for me.
+If they design what they will test,
+They grade their own, you see.
 I own the fix and the fixing,
 They own the open eyes.
-Blend the two in one head
+Put both in one head
 And the whole thing's a disguise.
 
 [Hook - last time]
 @voice bm_george
-Same words, but different jobs,
+One word, two different jobs,
 One builds it, one attests,
 One keeps the system running,
 One tests what the first one guessed.
 Safe is not the same as signed,
 Signed is not the same as safe,
-Do the work and show the work,
+Make the work and show the work,
 Then the two will meet in the middle.
 
 [Outro]

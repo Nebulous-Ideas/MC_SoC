@@ -7,7 +7,7 @@
     "ref": "https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services",
     "observed_at": "2026-11-25T20:00:00-07:00"
   },
-  "what_happened": "A SOC 2 effort involves two kinds of people who use the same words for different jobs. The security team designs, runs and fixes the controls and asks whether they would hold up against a real attack. The CPA firm, a licensed service auditor that must stay independent of the company, asks for evidence: it samples what happened, tests it against the stated criteria and reports exceptions. A Type I report speaks to the design of controls on one day; a Type II report speaks to design and operation over a period of time. Management describes the system and asserts that the controls meet the criteria; the auditor opines on that assertion. These points are general professional practice, restated here without quoting any standard, and need a practitioner's check before sign-off.",
+  "what_happened": "A SOC 2 effort involves two kinds of people who use the same words for different jobs. The security team designs, runs and fixes the controls and asks whether they would hold up against a real attack. The CPA firm acts as the service auditor and must stay independent of the company: it may not take on management responsibilities or run the client's operations, and designing what it later tests raises a self-review problem. It asks for evidence, samples what happened, tests it against the stated criteria and reports exceptions. A Type 1 report speaks to the suitability of design as of one date; a Type 2 report speaks to design and operating effectiveness over a period. Management describes the system and asserts that the controls meet the criteria; the auditor gives an opinion on that. Two of these points rest on the sources below; the Type 1 and Type 2 and management-assertion points come from a CPA firm's public explainer, with the governing text (AT-C 205) not read here, so a practitioner should check them before sign-off.",
   "lesson": "Secure and attested are different claims. Build and run the controls as the engineer, keep the evidence as if someone will test it, and let an independent auditor judge it. Do not expect one person to do both jobs, and do not read a clean report as proof of safety.",
   "tags": [
     "compliance",
@@ -27,6 +27,14 @@
     {
       "claim": "The AICPA's SOC 2 materials cover controls relevant to security, availability, processing integrity, confidentiality or privacy",
       "ref": "https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2"
+    },
+    {
+      "claim": "The AICPA's plain-English independence guide says a member firm may not assume management responsibilities for an attest client, and treats ongoing operating functions (for example running the client's network) as management responsibilities",
+      "ref": "https://pub.aicpa.org/codeofconduct/ethicsresources/Plain_English_Guide_to_Independence.pdf"
+    },
+    {
+      "claim": "A CPA firm's explainer says a Type 1 report covers the suitability of control design as of a date and a Type 2 report covers design and operating effectiveness over a period, with management's assertion alongside the auditor's report (secondary source)",
+      "ref": "https://linfordco.com/blog/what-is-soc-2/"
     }
   ],
   "redaction": {
