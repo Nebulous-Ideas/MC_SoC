@@ -13,6 +13,8 @@ left out; `<outline>` stands for the wiki's address. The example page is [exampl
 
 ## What the example used
 
+Paths starting `song/` are local files from the maintainer's setup (lyric sheet, beat, render); they are not in this repository, and the audio is not shared.
+
 | Step | Where it lives | Result |
 |---|---|---|
 | Lesson | `records/incident-squid-acl-shared-egress-denial.json`, mirrored in Outline's lesson-records collection | approved; redaction passed for the JSON text |

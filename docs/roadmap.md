@@ -1,5 +1,7 @@
 # Roadmap
 
+> This is the maintainer's working roadmap. Scripts and files it names that are not in this repository (for example `analyze.py`, `rhyme_find.py` or anything under `song/`) are local helpers and data that are not shared; the research notes are kept so the reasoning can be followed and reproduced with your own material.
+
 Status words: **built** (code and offline tests), **fake-tested** (works against a fake of the platform, never tried on the real one), **planned** (agreed, not started), **idea** (kicked around, nothing decided). Updated 2026-11-12.
 
 ## Where things stand

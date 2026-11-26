@@ -7,6 +7,15 @@ Thanks for helping. This project turns incidents and chosen news into reviewed c
 - **An exchange bundle.** A crate (two to eight sides and the measured relationship between them), a persona card or a trial prescription: numbers only. `crate_builder.py` computes a crate from a feature table. See `exchange/README.md`.
 - **A fix or an improvement** to the docs, the checks or the tests.
 
+## An example contribution: a new publisher
+1. Read `publishers/static_site.py`. A publisher is a module with `publish(records, out)` that renders what the shared gate (`gate.py`) lets through. It never decides what is publishable.
+2. Add `publishers/your_feed.py` and register it with one line in `publishers/__init__.py`.
+3. Add `tests/test_your_feed.py` first, using a fake (see `tests/test_publish.py`). Check that private fields (approver names, notes, `memory_ref`, internal links) do not appear in the output.
+4. Run the checks below. If it needs a client library, keep the import in your file and say so in the docstring.
+5. Update `docs/design.md` (a numbered decision: what is built, what is not) and the README layout list in the same pull request.
+
+Other seams (a memory system, a review surface, a source, an analyzer) follow the same shape; `AGENTS.md` says which file to read first for each.
+
 ## Before you open a pull request
 ```bash
 python3 -I -m unittest discover -s tests     # offline; fakes only; no installs
@@ -22,6 +31,9 @@ The core is standard library only. An adapter that needs a client library keeps 
 - **Redact by value.** Mask anything shaped like a secret, whatever its field is called.
 - **No voice cloning or sound-alikes of real people, and no copied content.** Lessons are restated, not reproduced.
 - **Say how much was tried.** "Fake-tested only" is a fine status. Do not describe a planned adapter as working.
+
+## Questions and ideas
+Open an issue. For a new adapter, say which seam it is and what platform it talks to before you write much code.
 
 ## Review
 A maintainer reviews every pull request, and exchange bundles get an extra look for names. Pipelines may not be running on a given install, so please run the checks above yourself and say so in the description. Agent-assisted commits end with a `Co-Authored-By:` trailer naming the agent.

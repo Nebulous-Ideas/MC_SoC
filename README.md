@@ -7,6 +7,8 @@ Master of Ceremonies + SOC. A closed loop that turns two streams into content:
 1. **Incidents** from our own systems (Graylog, Kuma, Sentry, Grafana, GitLab, Outline postmortems).
 2. **News** the organisation chooses to read (the OpenClaw agent stories behind Larry are the existing example).
 
+New here? Start with [CONTRIBUTING.md](CONTRIBUTING.md), the worked example in [docs/EXAMPLE.md](docs/EXAMPLE.md) and the stage map in [docs/pipeline.md](docs/pipeline.md).
+
 Both are normalised into a **lesson record**. The loop then senses, decides, acts (lyrics and the singing pipeline), verifies, and learns from the result.
 
 Status: the loop runs end to end with a person in it. Built and tested offline: lesson records, verify, review and sign-off, derived works, the publish gate and a static-site publisher, the analysis side (feature tables, crates, persona cards, exchange bundles) and the Act seam. Generation exists: the composition tools in `compose/` turn a lyric sheet into a rendered track and measure it. They were used for real on the maintainer's setup; here they are fake-tested only and need your own speech server. Unattended runs only generate drafts, and nothing is published without a recorded human approval. `docs/pipeline.md` gives every stage's status (built, run, planned, manual).
@@ -18,7 +20,38 @@ python3 verify.py                    # check every record in records/
 python3 verify.py --require-approved # publish gate: fails until signed off
 ```
 
-## Guardrails (fixed, from the idea page)
+## At a glance
+As of the first public release (numbers from the repository itself; rerun the commands to refresh them):
+
+| What | Count | How to check |
+|---|---|---|
+| Lesson records (incidents, history, news) | 10 | `ls records/` |
+| Derived works (draft and approved) | 8 | `ls works/` |
+| Example crates in the exchange | 4 | `python3 -I exchange.py check` |
+| Persona and target files | 10 | `ls personas/` |
+| Offline tests (fakes only, stdlib) | 247 | `python3 -I -m unittest discover -s tests` |
+| Items `verify.py` checks | 18, 0 errors | `python3 verify.py --all` |
+| Python in the core / `compose/` / tests | about 2.8k / 2.7k / 2.4k lines | |
+
+The core is standard library only. Anything that needs a library (audio, a speech server, a pitch tracker) lives in `compose/` or in its own adapter file.
+
+## An example process
+One change, start to finish. Details are in `CONTRIBUTING.md`; the full walk-through of one lesson becoming a song is `docs/EXAMPLE.md`.
+
+1. **Pick the seam.** Say you want a new publisher (a feed instead of a web page): that is one file in `publishers/` plus one line in `publishers/__init__.py`. The core does not change.
+2. **Copy the nearest adapter** (`publishers/static_site.py`) and write the test first, against a fake. No network, no token.
+3. **Run the checks** (`unittest`, `verify.py --all`, and `exchange.py check` if you touched `exchange/`).
+4. **Open a pull request** that says what you ran and what you did not try against the real platform. "Fake-tested only" is a fine status.
+5. **A maintainer reviews.** Publishing is gated: only approved, verified items go out, and approval is written by a named person through `review.py`, never by a model or a pull request.
+
+To see sign-off without touching anything real:
+
+```bash
+python3 review.py show practice-sign-off --works
+python3 review.py approve practice-sign-off --works --as "Your Name"   # practice only; do not commit it
+```
+
+## Guardrails (fixed)
 - Measure, don't sample.
 - No voice cloning and no sound-alikes of real people.
 - No copied content: lessons are restated, never reproduced.
@@ -55,5 +88,5 @@ One incident, one derived work, one page, end to end: [docs/EXAMPLE.md](docs/EXA
 - `tests/` offline tests (`python3 -I -m unittest discover -s tests`)
 
 ## Home and licence
-Source: https://github.com/Nebulous-Ideas/MC_SoC. Contributions are by pull request; see `CONTRIBUTING.md`.
+Source: https://github.com/Nebulous-Ideas/MC_SoC. Contributions are by pull request: read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 Licensed under the GNU Affero General Public License v3.0 (`LICENSE`). The art in `docs/img/` is generated, with the notes in `docs/img/README.md`.
