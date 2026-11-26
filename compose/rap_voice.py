@@ -14,6 +14,11 @@ A rap voice is chosen by its name (`voice: "talkie-rap"` in the request) or, whe
 for that voice whose text starts with the marker. The second form needs no change in the bot except its base URL: the bot writes
 "RAP: line one. line two." when it wants to rap and plain text otherwise.
 Environment: SPEECH_URL (upstream speech server), SPEECH_KEY is forwarded from the caller's Authorization header and never stored.
+Songs: a config entry may also list "songs": {"<id>": {"work": "/path/works/<id>.json", "beat": ..., "bpm": ..., "voice": ...}} and a
+"song_marker" (default "SONG:"). A request on the matched voice whose text starts with "SONG: <id>" sings that work's own text, but only
+when the work file says status approved and signoff approved. The bot only selects an id; it never supplies the words. Anything else (an
+unknown id, an unapproved work) is answered with the plain line in "song_not_ready" and nothing is rendered.
+
 Before a rap render the caller's Authorization header is checked against the upstream (GET /v1/models); a wrong key never starts a render.
 Needs: stdlib for this file; rendering runs sing.py (numpy, ffmpeg, your speech server). Fake-tested only; not run for real.
 
@@ -80,8 +85,9 @@ def render_with_sing(sheet, cfg, fmt="wav", key=None):
                         "--voice", cfg["voice"].split(":")[0].split("+")[0], "--slot-beats", str(cfg.get("slot_beats", 4)), "--no-play"],
                        check=True, capture_output=True, timeout=cfg.get("timeout_s", 90), cwd=HERE, env=env)
         wav = os.path.join(d, "song-rap.wav")
-        if fmt == "wav":
-            return open(wav, "rb").read()
+        if fmt == "wav":   # the mix is large (float, high rate); send 16-bit 44.1 kHz stereo
+            return subprocess.run(["ffmpeg", "-v", "error", "-i", wav, "-ar", "44100", "-ac", "2", "-c:a", "pcm_s16le", "-f", "wav", "-"],
+                                  check=True, capture_output=True, timeout=60).stdout
         return subprocess.run(["ffmpeg", "-v", "error", "-i", wav, "-f", {"mp3": "mp3", "opus": "ogg", "aac": "adts"}.get(fmt, "mp3"), "-"],
                               check=True, capture_output=True, timeout=30).stdout
 
@@ -131,6 +137,9 @@ class RapService:
         if cfg:
             return cfg, text, req
         for c in self.voices.values():
+            sm = c.get("song_marker", "SONG:")
+            if c.get("songs") and c.get("match_voice") == req.get("voice") and isinstance(text, str) and text.lstrip().lower().startswith(sm.lower()):
+                return c, ("song", text.lstrip()[len(sm):].strip()), req
             m = c.get("marker")
             if m and c.get("match_voice") == req.get("voice") and isinstance(text, str) and text.lstrip().lower().startswith(m.lower()):
                 body = text.lstrip()[len(m):].strip()
@@ -153,8 +162,35 @@ class RapService:
             hit = self.choose(req)
             if hit:
                 cfg, text, plain_req = hit
+                if isinstance(text, tuple):
+                    return self.song(req, cfg, text[1], method, path, headers)
                 return self.rap(req, cfg, text, plain_req, method, path, headers)
         return self.forward_fn(method, path, headers, body, self.upstream)
+
+    def song(self, req, cfg, wanted, method, path, headers):
+        """Sing an approved work chosen by id. The text comes from the work file, never from the request."""
+        sid = re.match(r"[a-z0-9][a-z0-9-]*", wanted.lower())
+        entry = cfg["songs"].get(sid.group(0)) if sid else None
+        work = None
+        if entry and self.authorised(headers):
+            try:
+                work = json.load(open(entry["work"]))
+            except (OSError, ValueError):
+                work = None
+        approved = bool(work) and work.get("status") == "approved" and (work.get("signoff") or {}).get("status") == "approved" and bool(work.get("content"))
+        fmt = req.get("response_format", "wav") if req.get("response_format", "wav") in ("wav", "mp3", "opus", "aac") else "wav"
+        if approved and self._lock.acquire(blocking=False):
+            try:
+                scfg = dict(cfg, timeout_s=240)
+                scfg.update({k: v for k, v in entry.items() if k in ("beat", "bpm", "voice", "slot_beats", "timeout_s")})
+                audio = self.render(work["content"], scfg, fmt, _bearer(headers))
+                return 200, {"wav": "audio/wav", "mp3": "audio/mpeg", "opus": "audio/ogg", "aac": "audio/aac"}[fmt], audio
+            except Exception as e:
+                sys.stderr.write(f"song render failed: {type(e).__name__}\n")
+            finally:
+                self._lock.release()
+        line = cfg.get("song_not_ready", "That song is not ready yet.")
+        return self.forward_fn(method, path, headers, json.dumps(dict(req, input=line, voice=cfg.get("fallback_voice", req.get("voice")))).encode(), self.upstream)
 
     def rap(self, req, cfg, text, plain_req, method, path, headers):
         lines, why = plan(text, cfg) if self.authorised(headers) else (None, "not authorised")

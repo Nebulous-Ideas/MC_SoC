@@ -1,0 +1,68 @@
+[Verse 1 - the engineer]
+@voice am_michael
+(slot 4)
+I build the gate and I watch the logs,
+I patch the box and I clear the fogs,
+I ask what breaks and how it burns,
+Then fix the thing before it turns.
+My question is: are we safe tonight?
+Does the control hold up in a fight?
+
+[Verse 2 - the accountant]
+@voice af_heart
+(slot 4)
+I ask a different kind of thing:
+Show me the proof, show me the string.
+A claim without a trail of dates
+Is just a wish that hesitates.
+I pull a sample, test it through,
+And write down what is false or true.
+
+[Hook]
+@voice bm_george
+(slot auto)
+Same words, but different jobs,
+One builds it, one attests,
+One keeps the system running,
+One tests what the first one guessed.
+
+[Verse 3 - snapshot and window]
+@voice af_heart
+(slot 4)
+Type one is a photograph,
+The design on a single day.
+Type two is a window of months,
+Did it work the whole way?
+Missed a review in the spring?
+That goes down as a line.
+Writing it up honestly
+Is how the thing stays fine.
+
+[Verse 4 - the wall in the middle]
+@voice am_michael
+(slot 4)
+The auditor can't build my stack,
+Then sign that it is sound.
+They stand outside and judge it,
+So the trust can be found.
+I own the fix and the fixing,
+They own the open eyes.
+Blend the two in one head
+And the whole thing's a disguise.
+
+[Hook - last time]
+@voice bm_george
+Same words, but different jobs,
+One builds it, one attests,
+One keeps the system running,
+One tests what the first one guessed.
+Safe is not the same as signed,
+Signed is not the same as safe,
+Do the work and show the work,
+Then the two will meet in the middle.
+
+[Outro]
+@voice af_heart
+(slot 4)
+A report is a letter, not armor.
+Build it well, then prove it plain.

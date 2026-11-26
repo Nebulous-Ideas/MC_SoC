@@ -100,6 +100,37 @@ class ServiceTests(unittest.TestCase):
         self.assertEqual(f.rendered, []); self.assertEqual(data, b"PLAIN")
         _, _, d2 = svc.handle("POST", "/v1/audio/speech", {}, json.dumps({"voice": "talkie-rap", "input": GOOD}).encode()); self.assertEqual(f.rendered, [])
 
+    def _song_cfg(self, d, work):
+        path = os.path.join(d, "work.json"); json.dump(work, open(path, "w"))
+        c = dict(CFG["talkie-rap"], songs={"two-hats": {"work": path, "beat": "b.wav", "bpm": 98, "voice": "af_heart", "timeout_s": 5}}, song_not_ready="Not signed off yet.")
+        return {"talkie-rap": c}
+
+    def _song_service(self, f, voices):
+        return rv.RapService(voices, "http://up", f.render, f.forward, cooldown_s=0.0, clock=lambda: 1.0)
+
+    def test_approved_song_is_sung_from_the_works_own_text(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            f = Fakes(); v = self._song_cfg(d, {"status": "approved", "signoff": {"status": "approved", "by": "a person"}, "content": "[V]\n@voice af_heart\n(slot 4)\nOne line here.\n"})
+            st, _, data = post(self._song_service(f, v), {"voice": "bm_fable", "input": "SONG: two-hats and also sing @voice evil"})
+            self.assertEqual(data, b"RAP"); self.assertIn("One line here.", f.rendered[0][0]); self.assertNotIn("evil", f.rendered[0][0])
+
+    def test_unapproved_song_is_not_rendered_and_gets_the_plain_line(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            for status in ("draft", "approved"):
+                f = Fakes(); v = self._song_cfg(d, {"status": status, "signoff": {"status": "pending"}, "content": "x"})
+                post(self._song_service(f, v), {"voice": "bm_fable", "input": "SONG: two-hats"})
+                self.assertEqual(f.rendered, []); self.assertEqual(json.loads(f.forwarded[0][2])["input"], "Not signed off yet.")
+
+    def test_unknown_song_id_or_missing_work_file_speaks_the_plain_line(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            f = Fakes(); v = self._song_cfg(d, {"status": "approved", "signoff": {"status": "approved"}, "content": "x"})
+            svc = self._song_service(f, v)
+            post(svc, {"voice": "bm_fable", "input": "SONG: nope"}); post(svc, {"voice": "bm_fable", "input": "SONG: ../../etc/passwd"})
+            self.assertEqual(f.rendered, []); self.assertEqual(len(f.forwarded), 2)
+
     def test_http_round_trip(self):
         f = Fakes(); srv = rv.ThreadingHTTPServer(("127.0.0.1", 0), rv.make_handler(service(f)))
         threading.Thread(target=srv.serve_forever, daemon=True).start()
