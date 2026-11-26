@@ -2,7 +2,7 @@
 
 A standalone song about closing the loop: open versus closed loops, the observe-orient-decide-act loop as a closed loop for decisions, a thermostat
 as the plain control example, this project's own closed loop (lesson, draft, checks, a person signs, feedback counted not obeyed) and the
-security shift. It is separate from the SOC 2 songs. About 107 seconds, three stock voices. The author of the OODA model is not named in the lyric
+security shift. About 107 seconds, three stock voices. The author of the OODA model is not named in the lyric
 or the lesson text; the sources are linked.
 
 **Checked so far, needs a person before sign-off:** the open-loop and closed-loop distinction and the thermostat example match an encyclopedia
