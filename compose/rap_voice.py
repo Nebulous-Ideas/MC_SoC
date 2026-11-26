@@ -139,6 +139,12 @@ class RapService:
 
     def handle(self, method, path, headers, body):
         """Return (status, content_type, bytes). Rap requests are handled here; everything else is forwarded."""
+        t0 = self.clock()
+        out = self._handle(method, path, headers, body)
+        sys.stderr.write(f"{method} {path} -> {out[0]} {out[1]} {len(out[2])}B in {self.clock() - t0:.1f}s\n")   # no text, no key
+        return out
+
+    def _handle(self, method, path, headers, body):
         if method == "POST" and path.rstrip("/") == "/v1/audio/speech":
             try:
                 req = json.loads(body or b"{}")
