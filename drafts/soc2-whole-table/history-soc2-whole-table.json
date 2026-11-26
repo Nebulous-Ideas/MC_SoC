@@ -7,8 +7,8 @@
     "ref": "https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services",
     "observed_at": "2026-11-25T21:00:00-07:00"
   },
-  "what_happened": "A SOC 2 report is the work of more people than the engineer and the CPA. Management writes the system description and asserts that the controls meet the criteria. The people team hires, trains and removes access when someone leaves. Vendors that run part of the service are either left out of the examination (carved out), in which case the company lists the controls it assumes the vendor runs and must read the vendor's own report and do what it asks, or are included and tested. Customers may also be expected to run controls of their own, which the report lists as complementary user entity controls. The engineer and the auditor roles are covered in the companion lesson. The sources below support the carve-out and customer-control points and the criteria on people and vendors; the claim about leadership setting direction is general practice. A practitioner should check the wording before sign-off.",
-  "lesson": "Safe is a table, not a chair. Leaders own the claim and the funding, the people team owns who gets in and who is removed, vendors and customers each carry controls the report depends on, and each of those hand-offs has to be named and read. A report is only as strong as the weakest seat.",
+  "what_happened": "Before any seat has work to do, the organisation decides what the SOC 2 covers: which systems and services are inside the boundary, which of the five Trust Services categories to include, and, for a Type 2, which period. Security is always included; availability, processing integrity, confidentiality and privacy are chosen by management according to the service and what customers need. The choices go into the system description, and anything left out, or carved out to a vendor, is described but not tested. A SOC 2 report is the work of more people than the engineer and the CPA. Management writes the system description and asserts that the controls meet the criteria. The people team hires, trains and removes access when someone leaves. Vendors that run part of the service are either left out of the examination (carved out), in which case the company lists the controls it assumes the vendor runs and must read the vendor's own report and do what it asks, or are included and tested. Customers may also be expected to run controls of their own, which the report lists as complementary user entity controls. The engineer and the auditor roles are covered in the companion lesson. The sources below support the carve-out and customer-control points and the criteria on people and vendors; the claim about leadership setting direction is general practice. A practitioner should check the wording before sign-off.",
+  "lesson": "The business chooses the scope, and then every seat has work inside it. A report only speaks for what the scope names, so say plainly what is in and what is out. Safe is a table, not a chair. Leaders own the claim and the funding, the people team owns who gets in and who is removed, vendors and customers each carry controls the report depends on, and each of those hand-offs has to be named and read. A report is only as strong as the weakest seat.",
   "tags": [
     "compliance",
     "soc2",
@@ -20,6 +20,10 @@
     "spoken-rhyme"
   ],
   "evidence": [
+    {
+      "claim": "Management sets a SOC 2 scope: security is the one required category, and availability, processing integrity, confidentiality and privacy are chosen by the organisation based on its service and customer commitments; the system description sets the boundary (a CPA firm's explainer, secondary)",
+      "ref": "https://www.schellman.com/blog/soc-examinations/how-to-scope-a-soc-2-audit"
+    },
     {
       "claim": "Under the carve-out method the service organization excludes a subservice organization's controls from the examination and lists the controls it assumes that organization operates; under the inclusive method those controls are included and tested (secondary explainer)",
       "ref": "https://www.securisea.com/resources/soc-2-carve-out-method-vs-inclusive-method"
