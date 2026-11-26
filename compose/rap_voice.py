@@ -8,8 +8,13 @@ to the plain fallback voice), so the bot never goes silent.
 
 Config (JSON file named by RAP_VOICE_CONFIG; nothing is built in):
   {"talkie-rap": {"voice": "bm_george:robot", "beat": "/path/beat.wav", "bpm": 98, "slot_beats": 4,
-                  "fallback_voice": "bm_george"}}
+                  "fallback_voice": "bm_george",
+                  "match_voice": "bm_fable", "marker": "RAP:"}}
+A rap voice is chosen by its name (`voice: "talkie-rap"` in the request) or, when `match_voice` and `marker` are set, by a request
+for that voice whose text starts with the marker. The second form needs no change in the bot except its base URL: the bot writes
+"RAP: line one. line two." when it wants to rap and plain text otherwise.
 Environment: SPEECH_URL (upstream speech server), SPEECH_KEY is forwarded from the caller's Authorization header and never stored.
+Before a rap render the caller's Authorization header is checked against the upstream (GET /v1/models); a wrong key never starts a render.
 Needs: stdlib for this file; rendering runs sing.py (numpy, ffmpeg, your speech server). Fake-tested only; not run for real.
 
 Rules kept here:
@@ -17,7 +22,7 @@ Rules kept here:
 - Length caps on characters, lines and syllables; one render at a time; a cooldown between rap requests.
 - Stock voices only: this file never picks a voice that is not in your config.
 """
-import json, os, re, subprocess, sys, tempfile, threading, time, urllib.request
+import hashlib, json, os, re, subprocess, sys, tempfile, threading, time, urllib.error, urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -62,14 +67,18 @@ def build_sheet(lines, cfg):
     return "\n".join(out) + "\n"
 
 
-def render_with_sing(sheet, cfg, fmt="wav"):
-    """Real renderer: runs sing.py on the sheet over cfg['beat'] and returns audio bytes. Raises on any failure."""
+def render_with_sing(sheet, cfg, fmt="wav", key=None):
+    """Real renderer: runs sing.py on the sheet over cfg['beat'] and returns audio bytes. Raises on any failure.
+    `key` is the caller's own speech-server key for this one render; it goes only into the child's environment."""
+    env = dict(os.environ)
+    if key:
+        env["SPEECH_KEY"] = key
     with tempfile.TemporaryDirectory(prefix="rap-") as d:
         path = os.path.join(d, "lyrics-rap.txt")
         open(path, "w").write(sheet)
         subprocess.run([sys.executable, os.path.join(HERE, "sing.py"), "--lyrics", path, "--beat", cfg["beat"], "--bpm", str(cfg["bpm"]),
                         "--voice", cfg["voice"].split(":")[0].split("+")[0], "--slot-beats", str(cfg.get("slot_beats", 4)), "--no-play"],
-                       check=True, capture_output=True, timeout=cfg.get("timeout_s", 90), cwd=HERE)
+                       check=True, capture_output=True, timeout=cfg.get("timeout_s", 90), cwd=HERE, env=env)
         wav = os.path.join(d, "song-rap.wav")
         if fmt == "wav":
             return open(wav, "rb").read()
@@ -88,26 +97,61 @@ def forward(method, path, headers, body, upstream):
         return e.code, "application/json", e.read()
 
 
+def _bearer(headers):
+    auth = next((v for k, v in headers.items() if k.lower() == "authorization"), "")
+    return auth[7:].strip() if auth.lower().startswith("bearer ") else None
+
+
 class RapService:
     def __init__(self, voices, upstream, render=render_with_sing, forward_fn=forward, cooldown_s=3.0, clock=time.monotonic):
         self.voices, self.upstream, self.render, self.forward_fn = voices, upstream, render, forward_fn
         self.cooldown_s, self.clock, self._last = cooldown_s, clock, -1e9
         self._lock = threading.Lock()
+        self._ok = {}   # sha256 of a checked Authorization header -> time checked; the header itself is never kept
+
+    def authorised(self, headers):
+        auth = next((v for k, v in headers.items() if k.lower() == "authorization"), "")
+        if not auth:
+            return False
+        h = hashlib.sha256(auth.encode()).hexdigest()
+        if self.clock() - self._ok.get(h, -1e9) < 300:
+            return True
+        status, _, _ = self.forward_fn("GET", "/v1/models", {"Authorization": auth}, b"", self.upstream)
+        if status == 200:
+            self._ok[h] = self.clock()
+            return True
+        return False
+
+    def choose(self, req):
+        """(config, text, request) for a rap request, else None. Matches a rap voice by name, or a marker on a configured voice."""
+        if not isinstance(req, dict):
+            return None
+        text = req.get("input")
+        cfg = self.voices.get(req.get("voice"))
+        if cfg:
+            return cfg, text, req
+        for c in self.voices.values():
+            m = c.get("marker")
+            if m and c.get("match_voice") == req.get("voice") and isinstance(text, str) and text.lstrip().lower().startswith(m.lower()):
+                body = text.lstrip()[len(m):].strip()
+                return c, body, dict(req, input=body)
+        return None
 
     def handle(self, method, path, headers, body):
-        """Return (status, content_type, bytes). Rap voices are handled here; everything else is forwarded."""
+        """Return (status, content_type, bytes). Rap requests are handled here; everything else is forwarded."""
         if method == "POST" and path.rstrip("/") == "/v1/audio/speech":
             try:
                 req = json.loads(body or b"{}")
             except ValueError:
                 return self.forward_fn(method, path, headers, body, self.upstream)
-            cfg = self.voices.get(req.get("voice")) if isinstance(req, dict) else None
-            if cfg:
-                return self.rap(req, cfg, method, path, headers)
+            hit = self.choose(req)
+            if hit:
+                cfg, text, plain_req = hit
+                return self.rap(req, cfg, text, plain_req, method, path, headers)
         return self.forward_fn(method, path, headers, body, self.upstream)
 
-    def rap(self, req, cfg, method, path, headers):
-        lines, why = plan(req.get("input"), cfg)
+    def rap(self, req, cfg, text, plain_req, method, path, headers):
+        lines, why = plan(text, cfg) if self.authorised(headers) else (None, "not authorised")
         fmt = req.get("response_format", "wav") if req.get("response_format", "wav") in ("wav", "mp3", "opus", "aac") else "wav"
         if lines and self._lock.acquire(blocking=False):
             try:
@@ -115,13 +159,15 @@ class RapService:
                 if now - self._last >= self.cooldown_s:
                     self._last = now
                     try:
-                        audio = self.render(build_sheet(lines, cfg), cfg, fmt)
+                        audio = self.render(build_sheet(lines, cfg), cfg, fmt, _bearer(headers))
                         return 200, {"wav": "audio/wav", "mp3": "audio/mpeg", "opus": "audio/ogg", "aac": "audio/aac"}[fmt], audio
                     except Exception as e:   # any render failure falls back to plain speech
                         sys.stderr.write(f"rap render failed, using plain voice: {type(e).__name__}\n")
             finally:
                 self._lock.release()
-        plain = dict(req, voice=cfg.get("fallback_voice", "af_heart"))
+        plain = dict(plain_req)
+        if plain.get("voice") in self.voices:   # a rap voice name is not a real voice upstream
+            plain["voice"] = cfg.get("fallback_voice", "af_heart")
         return self.forward_fn(method, path, headers, json.dumps(plain).encode(), self.upstream)
 
 

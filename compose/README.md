@@ -42,7 +42,7 @@ cat > rap.json <<'J'
 J
 RAP_VOICE_CONFIG=rap.json SPEECH_URL=http://your-speech-server:8000 python3 rap_voice.py
 ```
-The caller's API key travels in its own `Authorization` header; this service never stores it. It listens on `127.0.0.1:8010` unless you set `RAP_HOST` and `RAP_PORT`. Not tried against a real speech server or a real bot.
+The caller's API key travels in its own `Authorization` header and is checked against your speech server (`GET /v1/models`) before any rap render; this service never stores it (only a hash of a checked header, for five minutes). To rap without changing a bot's voice setting, add `"match_voice": "bm_fable", "marker": "RAP:"` to the entry: a request for that voice whose text starts with the marker is rapped (marker removed), and everything else is passed through unchanged. `rap-voice.service.example` is a systemd unit. Bind it to an address only your bot can reach. It listens on `127.0.0.1:8010` unless you set `RAP_HOST` and `RAP_PORT`. Rendered once through a real speech server and `sing.py` (an 11 s clip in about a second after the first run) and called from the bot's container; nobody has listened to the result in Discord yet.
 
 ## Try it without a server
 

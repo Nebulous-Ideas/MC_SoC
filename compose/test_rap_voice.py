@@ -3,7 +3,8 @@ import json, os, sys, threading, unittest, urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rap_voice as rv
 
-CFG = {"talkie-rap": {"voice": "bm_george:robot", "beat": "beat.wav", "bpm": 98, "slot_beats": 4, "fallback_voice": "bm_george"}}
+CFG = {"talkie-rap": {"voice": "bm_george:robot", "beat": "beat.wav", "bpm": 98, "slot_beats": 4, "fallback_voice": "bm_george",
+                      "match_voice": "bm_fable", "marker": "RAP:"}}
 GOOD = "Toast is on my mind tonight.\nGolden brown and crisp and bright."
 
 
@@ -11,12 +12,15 @@ class Fakes:
     def __init__(self, fail=False):
         self.rendered, self.forwarded, self.fail = [], [], fail
 
-    def render(self, sheet, cfg, fmt="wav"):
+    def render(self, sheet, cfg, fmt="wav", key=None):
+        self.keys = getattr(self, "keys", []) + [key]
         if self.fail:
             raise RuntimeError("boom")
         self.rendered.append((sheet, fmt)); return b"RAP"
 
     def forward(self, method, path, headers, body, upstream):
+        if path == "/v1/models":
+            return (200 if headers.get("Authorization") == "Bearer x" else 401), "application/json", b"{}"
         self.forwarded.append((method, path, body, upstream)); return 200, "audio/mpeg", b"PLAIN"
 
 
@@ -56,7 +60,7 @@ class ServiceTests(unittest.TestCase):
 
     def test_other_voices_and_paths_pass_through_unchanged(self):
         f = Fakes(); svc = service(f)
-        post(svc, {"voice": "af_heart", "input": "hello"}); svc.handle("GET", "/v1/models", {}, b"")
+        post(svc, {"voice": "af_heart", "input": "hello"}); svc.handle("GET", "/v1/voices", {}, b"")
         self.assertEqual(len(f.forwarded), 2); self.assertEqual(f.rendered, []); self.assertEqual(f.forwarded[0][3], "http://up")
 
     def test_bad_text_falls_back_to_the_plain_voice(self):
@@ -75,12 +79,33 @@ class ServiceTests(unittest.TestCase):
     def test_bad_json_is_forwarded_not_crashed(self):
         f = Fakes(); service(f).handle("POST", "/v1/audio/speech", {}, b"{not json"); self.assertEqual(len(f.forwarded), 1)
 
+    def test_marker_on_the_normal_voice_raps_and_strips_the_marker(self):
+        f = Fakes(); st, _, data = post(service(f), {"voice": "bm_fable", "input": "RAP: " + GOOD, "speed": 1.1})
+        self.assertEqual(data, b"RAP"); self.assertNotIn("RAP:", f.rendered[0][0]); self.assertIn("Toast is on my mind", f.rendered[0][0])
+
+    def test_no_marker_on_the_normal_voice_is_forwarded_untouched(self):
+        f = Fakes(); body = {"voice": "bm_fable", "input": "Want some toast?", "speed": 1.12}; post(service(f), body)
+        self.assertEqual(json.loads(f.forwarded[0][2]), body); self.assertEqual(f.rendered, [])
+
+    def test_failed_marker_rap_speaks_plain_without_the_marker_on_the_original_voice(self):
+        f = Fakes(fail=True); post(service(f), {"voice": "bm_fable", "input": "RAP: " + GOOD})
+        sent = json.loads(f.forwarded[0][2]); self.assertEqual(sent["voice"], "bm_fable"); self.assertTrue(sent["input"].startswith("Toast"))
+
+    def test_callers_key_goes_to_the_renderer_only_for_that_call(self):
+        f = Fakes(); post(service(f), {"voice": "talkie-rap", "input": GOOD}); self.assertEqual(f.keys, ["x"])
+
+    def test_wrong_key_never_starts_a_render(self):
+        f = Fakes(); svc = service(f)
+        st, _, data = svc.handle("POST", "/v1/audio/speech", {"Authorization": "Bearer bad"}, json.dumps({"voice": "talkie-rap", "input": GOOD}).encode())
+        self.assertEqual(f.rendered, []); self.assertEqual(data, b"PLAIN")
+        _, _, d2 = svc.handle("POST", "/v1/audio/speech", {}, json.dumps({"voice": "talkie-rap", "input": GOOD}).encode()); self.assertEqual(f.rendered, [])
+
     def test_http_round_trip(self):
         f = Fakes(); srv = rv.ThreadingHTTPServer(("127.0.0.1", 0), rv.make_handler(service(f)))
         threading.Thread(target=srv.serve_forever, daemon=True).start()
         try:
             req = urllib.request.Request(f"http://127.0.0.1:{srv.server_address[1]}/v1/audio/speech", method="POST",
-                                         data=json.dumps({"voice": "talkie-rap", "input": GOOD}).encode(), headers={"Content-Type": "application/json"})
+                                         data=json.dumps({"voice": "talkie-rap", "input": GOOD}).encode(), headers={"Content-Type": "application/json", "Authorization": "Bearer x"})
             with urllib.request.urlopen(req, timeout=5) as r:
                 self.assertEqual(r.read(), b"RAP")
         finally:
