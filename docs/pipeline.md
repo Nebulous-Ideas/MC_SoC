@@ -8,6 +8,8 @@ Three loops share one rule: a person decides what is published, numbers can be s
 
 Status key: **built** = code and tests exist here; **run** = used on real data by the maintainer (not yet tried on your setup); **planned** = designed, not built; **manual** = a person does it.
 
+> **Scripts named here that are not in this repository** (for example `seg_library.py`, `tag_windows.py` and the NAS matching scripts) are the maintainer's local helpers for one music library. The stage is described so you can build your own; the interfaces that matter (feature tables, `crate_builder.py`, `exchange.py check`) are here.
+
 ## 1. Lesson loop
 
 ```mermaid
