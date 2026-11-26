@@ -1,0 +1,91 @@
+"""Offline tests for rap_voice.py: fake renderer and fake upstream, no speech server, no audio. Run from compose/ or via tests/."""
+import json, os, sys, threading, unittest, urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rap_voice as rv
+
+CFG = {"talkie-rap": {"voice": "bm_george:robot", "beat": "beat.wav", "bpm": 98, "slot_beats": 4, "fallback_voice": "bm_george"}}
+GOOD = "Toast is on my mind tonight.\nGolden brown and crisp and bright."
+
+
+class Fakes:
+    def __init__(self, fail=False):
+        self.rendered, self.forwarded, self.fail = [], [], fail
+
+    def render(self, sheet, cfg, fmt="wav"):
+        if self.fail:
+            raise RuntimeError("boom")
+        self.rendered.append((sheet, fmt)); return b"RAP"
+
+    def forward(self, method, path, headers, body, upstream):
+        self.forwarded.append((method, path, body, upstream)); return 200, "audio/mpeg", b"PLAIN"
+
+
+def service(fakes, cooldown=0.0):
+    t = [100.0]
+    return rv.RapService(CFG, "http://up", fakes.render, fakes.forward, cooldown_s=cooldown, clock=lambda: t.__setitem__(0, t[0] + 10) or t[0])
+
+
+def post(svc, body, path="/v1/audio/speech"):
+    return svc.handle("POST", path, {"Authorization": "Bearer x"}, json.dumps(body).encode())
+
+
+class PlanTests(unittest.TestCase):
+    def test_good_text_becomes_lines(self):
+        lines, why = rv.plan(GOOD, CFG["talkie-rap"]); self.assertEqual(len(lines), 2); self.assertIsNone(why)
+
+    def test_directives_are_refused_not_executed(self):
+        for bad in ("@voice evil\nhello", "(slot 1)\nhi", "[Verse]\nhi", "hello\n(break 99)", "# note"):
+            self.assertIsNone(rv.plan(bad, CFG["talkie-rap"])[0], bad)
+
+    def test_limits(self):
+        c = CFG["talkie-rap"]
+        self.assertIsNone(rv.plan("", c)[0]); self.assertIsNone(rv.plan("x" * 801, c)[0])
+        self.assertIsNone(rv.plan("\n".join(["la la"] * 17), c)[0]); self.assertIsNone(rv.plan("a\x00b", c)[0])
+        self.assertIsNone(rv.plan(" ".join(["extraordinarily"] * 6), c)[0])   # too many syllables for a 4-beat slot
+
+    def test_sheet_has_voice_slot_and_blocks_of_four(self):
+        sheet = rv.build_sheet(["a b"] * 5, CFG["talkie-rap"])
+        self.assertTrue(sheet.startswith("@voice bm_george:robot\n(slot 4)\n"))
+        self.assertEqual(sheet.count("@voice"), 2)
+
+
+class ServiceTests(unittest.TestCase):
+    def test_rap_voice_renders_and_does_not_forward(self):
+        f = Fakes(); s, ct, data = post(service(f), {"voice": "talkie-rap", "input": GOOD, "response_format": "mp3"})
+        self.assertEqual((s, data, ct), (200, b"RAP", "audio/mpeg")); self.assertEqual(f.forwarded, []); self.assertEqual(f.rendered[0][1], "mp3")
+
+    def test_other_voices_and_paths_pass_through_unchanged(self):
+        f = Fakes(); svc = service(f)
+        post(svc, {"voice": "af_heart", "input": "hello"}); svc.handle("GET", "/v1/models", {}, b"")
+        self.assertEqual(len(f.forwarded), 2); self.assertEqual(f.rendered, []); self.assertEqual(f.forwarded[0][3], "http://up")
+
+    def test_bad_text_falls_back_to_the_plain_voice(self):
+        f = Fakes(); post(service(f), {"voice": "talkie-rap", "input": "@voice x\nhi"})
+        sent = json.loads(f.forwarded[0][2]); self.assertEqual(sent["voice"], "bm_george"); self.assertEqual(f.rendered, [])
+
+    def test_render_failure_falls_back_not_silent(self):
+        f = Fakes(fail=True); st, _, data = post(service(f), {"voice": "talkie-rap", "input": GOOD})
+        self.assertEqual((st, data), (200, b"PLAIN"))
+
+    def test_cooldown_sends_the_second_request_to_plain_speech(self):
+        f = Fakes(); svc = rv.RapService(CFG, "http://up", f.render, f.forward, cooldown_s=1000, clock=lambda: 5.0)
+        post(svc, {"voice": "talkie-rap", "input": GOOD}); post(svc, {"voice": "talkie-rap", "input": GOOD})
+        self.assertEqual(len(f.rendered), 1); self.assertEqual(len(f.forwarded), 1)
+
+    def test_bad_json_is_forwarded_not_crashed(self):
+        f = Fakes(); service(f).handle("POST", "/v1/audio/speech", {}, b"{not json"); self.assertEqual(len(f.forwarded), 1)
+
+    def test_http_round_trip(self):
+        f = Fakes(); srv = rv.ThreadingHTTPServer(("127.0.0.1", 0), rv.make_handler(service(f)))
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            req = urllib.request.Request(f"http://127.0.0.1:{srv.server_address[1]}/v1/audio/speech", method="POST",
+                                         data=json.dumps({"voice": "talkie-rap", "input": GOOD}).encode(), headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=5) as r:
+                self.assertEqual(r.read(), b"RAP")
+        finally:
+            srv.shutdown(); srv.server_close()
+
+
+if __name__ == "__main__":
+    unittest.main()
