@@ -82,6 +82,9 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(q["query"]["query_string"], '"203.0.113.7"'); self.assertEqual(q["search_types"][0]["limit"], 5)
         self.assertEqual(q["timerange"], {"type": "relative", "range": 3600})
 
+    def test_example_field_map_only_uses_known_kinds(self):
+        self.assertTrue(set(S.EXAMPLE_GRAYLOG_FIELD_MAP.values()) <= {"host", "ioc"})
+
     def test_influx_flux_is_built_from_a_template_with_a_validated_value_only(self):
         seen = {}
         def fake_urlopen(req, timeout=0):

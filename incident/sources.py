@@ -18,6 +18,12 @@ HASH = re.compile(r"^(?:[A-Fa-f0-9]{32}|[A-Fa-f0-9]{40}|[A-Fa-f0-9]{64})$")
 HOST = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,62}$")
 
 
+# Field names seen on a firewall/DNS/proxy stream of a Graylog 7.2 server (read through its MCP field listing; names only, no values).
+# They are a starting point, not a standard: field names depend on how your inputs and pipelines parse each stream, so list yours first
+# (`check_graylog.py`) and edit this map. A row field maps to a fact kind: "host" (a system name) or "ioc" (an address, domain or hash).
+EXAMPLE_GRAYLOG_FIELD_MAP = {"source": "host", "src_ip": "ioc", "dest_ip": "ioc", "dns_qname": "ioc"}
+
+
 def valid_ioc(value):
     """True only for an IP address, a domain name or a hex hash. Everything else (quotes, spaces, wildcards, URLs) is refused."""
     if not isinstance(value, str) or not value or len(value) > 253:
