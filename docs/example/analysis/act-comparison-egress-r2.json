@@ -1,0 +1,62 @@
+{
+ "lesson": "incident-squid-acl-shared-egress-denial",
+ "form": "spoken-rhyme",
+ "card": "rapid-melodic",
+ "engine": "sing-stems",
+ "status": "generated",
+ "target": {
+  "card": "rapid-melodic",
+  "form": "spoken-rhyme",
+  "n_tracks": 6,
+  "bands": {
+   "heard_syl_per_active_s": {
+    "low": 4.63,
+    "mid": 4.87,
+    "high": 5.98
+   },
+   "npitch_sd_st": {
+    "low": 2.6,
+    "mid": 2.74,
+    "high": 2.77
+   },
+   "npitch_span_st": {
+    "low": 9.7,
+    "mid": 11.05,
+    "high": 18.1
+   }
+  }
+ },
+ "seconds": 87.0,
+ "values": {
+  "heard_syl_per_active_s": 5.09,
+  "npitch_sd_st": 3.44,
+  "npitch_span_st": 17.0
+ },
+ "comparison": {
+  "scored": 3,
+  "inside": 2,
+  "measures": {
+   "heard_syl_per_active_s": {
+    "value": 5.09,
+    "where": "inside",
+    "gap": 0.0,
+    "from_median": 0.22
+   },
+   "npitch_sd_st": {
+    "value": 3.44,
+    "where": "above",
+    "gap": 0.67,
+    "from_median": 0.7
+   },
+   "npitch_span_st": {
+    "value": 17.0,
+    "where": "inside",
+    "gap": 0.0,
+    "from_median": 5.95
+   }
+  },
+  "unscored": [],
+  "missing": []
+ },
+ "next": "lyrics and audio still need verify and a person's sign-off; this report approves nothing"
+}

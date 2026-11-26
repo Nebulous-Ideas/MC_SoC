@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "song-egress-shared-path",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "incident-squid-acl-shared-egress-denial"
+  ],
+  "status": "draft",
+  "content": "[Intro]\n@voice bm_george\n(break 2)\nCheck: pattern. Difficulty, a registry.\nRolled: everyone at once.\n\n[Verse 1 - the pull]\n@voice af_heart\n(slot auto)\nEvery pull fails, the public and the private too,\nThe same forbidden answer, every registry through.\nOne error on every door is a clue about the hall,\nNot about the lock on any one door at all.\n(break 2)\n\n[Hook]\n@voice af_heart+bm_george\nSuspect the shared path, not each account,\nThe pattern is the message, the words don't count.\nA restart that works is not the reason why,\nWrite down what is still unknown, and don't lie.\n(break 4)\n\n[Verse 2 - the gate]\n@voice am_michael\n(slot 2)\nThe gate checked the rule before the rules that let it through,\nAnything unmatched was turned away, as it was built to do.\nThe trigger never showed, the tunnel stayed a riddle,\nTwo open questions beside the fix, and the fix sits in the middle.\n(break 2)\n\n[Outro]\n@voice bm_george\nCheck: pattern. Rolled: the shared path. Passed.\nThe question still open goes in the notes, at last.\n",
+  "redaction": {
+    "status": "pending",
+    "method": "not yet checked; production step, to be checked by a person before any release",
+    "checked_at": "2026-11-16T00:00:00-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

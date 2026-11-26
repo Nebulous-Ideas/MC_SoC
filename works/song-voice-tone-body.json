@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "song-voice-tone-body",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "history-voice-tone-body"
+  ],
+  "status": "draft",
+  "content": "[Refrain - open]\n@voice bm_george\n(break 2)\nBody, edge and air, all in tune,\nShape the tone and get it right.\n\n[Verse 1 - body]\n@voice am_michael\n(slot 2)\nI'm boomy, I'm the rumble,\nAll chest, a heavy tumble,\nSeven over, bloated,\nEach vowel overloaded.\nA blanket on the speaker,\nThe consonants get weaker.\nThe kick and I are fighting,\nOne space, and no dividing.\n\n[Verse 2 - edge]\n@voice af_bella\n(slot auto)\nThe body is the chest, the warm and round part,\nThe bright part is the edge that makes the sound sharp,\nToo much of it, the letters start to bite,\nToo little, and the words go dull as night,\nJust right.\n\n[Verse 3 - air]\n@voice af_heart\nThe air's the breathy shimmer way up there,\nA whisper on the top, a little flare.\nEach one has got a range, a fair share,\nCompare.\nSo measure all the three before you say the tone is fair.\n\n[Refrain]\n@voice bm_george\nBody, edge and air, all in tune,\nShape the tone and get it right.\n(break 2)\n\n[Verse 4 - the fix]\n@voice af_heart\nSo take a shelf and tip the low end under,\nLess thunder, twelve down, no more wonder,\nHear it open.\nThe body drops from seven down to two,\nNow you can hear the words come cutting through.\nThe bright and air I never had to touch,\nNot much.\nA tone that's shaped will always beat a strong one,\nNo shouting.\nIt sits, it shines, it leaves the low alone.\n\n[Bridge]\n@voice bm_george\nIt's lighter in the ears now,\nThe chest has lost its weight,\nNobody hears the shelf you set,\nThey only hear it clear.\n\n[Refrain - last time]\n@voice bm_george\nWarm down low but don't let it boom,\nBright on top but don't let it bite,\nLeave some air at the top of the room,\nBody, edge and air, all in tune.\n",
+  "made_with": {
+    "tool": "lyric sheet written in a Claude Code session; rendered locally with sing.py (audio kept outside the repository)",
+    "model": "claude-fable-5-2",
+    "at": "2026-11-14T18:07:38-07:00"
+  },
+  "source_links": [
+    "file:docs/roadmap.md#voice-tone-brightness-air-body"
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T18:07:38-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

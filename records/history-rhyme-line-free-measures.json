@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "history-rhyme-line-free-measures",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b",
+    "observed_at": "2026-11-13T00:00:00-08:00"
+  },
+  "what_happened": "We wanted to measure rhyme from audio. Measures that depend on where lines end failed, because only about half of the real line ends fall on a pause that can be heard. Measures counted on the stream of words in a short window held up: how dense the rhyme is, how often an ending matches on two or more vowels, and how near or far the partner sits. Share of end rhyme could not be recovered from audio.",
+  "lesson": "Rhyme is more than the last word of a line. Count vowels that answer each other anywhere nearby, and stack two or more at a time; that is what can be heard and measured.",
+  "tags": [
+    "rhyme",
+    "lyrics",
+    "measurement"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "No phrase-cutting rule finds more than about half of the published line ends",
+      "ref": "file:docs/roadmap.md#instrument-validation-against-planted-truth"
+    },
+    {
+      "claim": "On 28 gated hold-out tracks from unseen artists, heard against published text agrees at 0.74, 0.78, 0.72, 0.75 and 0.86 for the five line-free measures, with levels within 1%",
+      "ref": "file:docs/roadmap.md#rhyme-measures-that-need-no-line-ends"
+    },
+    {
+      "claim": "The line-free measures do not reproduce written end-rhyme or internal-rhyme share (-0.16, -0.17)",
+      "ref": "file:docs/roadmap.md#rhyme-measures-that-need-no-line-ends"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T14:54:24-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-14T22:01:31Z"
+  },
+  "memory_ref": "outline:2d5b0e60-4b31-497d-96b3-e6dba3012327"
+}

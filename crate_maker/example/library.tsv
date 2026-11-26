@@ -1,0 +1,25 @@
+artist	title	duration_s	tags
+Artist A	Track 1	150	spoken
+Artist A	Track 2	230	spoken
+Artist A	Track 3	300	spoken
+Artist A	Track 4	300	spoken
+Artist B	Track 1	150	spoken
+Artist B	Track 2	190	spoken
+Artist B	Track 3	300	spoken
+Artist B	Track 4	300	spoken
+Artist C	Track 1	300	spoken
+Artist C	Track 2	270	spoken
+Artist C	Track 3	300	spoken
+Artist C	Track 4	90	spoken
+Artist D	Track 1	270	sung
+Artist D	Track 2	300	sung
+Artist D	Track 3	270	sung
+Artist D	Track 4	190	sung
+Artist E	Track 1	150	sung
+Artist E	Track 2	300	sung
+Artist E	Track 3	150	sung
+Artist E	Track 4	150	sung
+Artist F	Track 1	230	sung
+Artist F	Track 2	150	sung
+Artist F	Track 3	270	sung
+Artist F	Track 4	150	sung;live

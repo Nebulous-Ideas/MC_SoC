@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "song-voice-level-in-mix",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "history-voice-level-in-mix"
+  ],
+  "status": "draft",
+  "content": "[Hook - open]\n@voice af_bella\n(break 2)\nTuck it in and let the drums stand tall,\nCut the mud and let the kick come through,\nLift the beat when the lines recall,\nSit inside it, that's the move.\n(break 2)\n\n[Verse 1 - on top]\n@voice bm_george\n(slot auto)\nI thought the voice should sit on top and tower,\nMore power, louder, turn it up each hour,\nBut the beat went sour,\nThin and hollow.\nThe drums are not a carpet, they're the floor,\nYou stand in them, not over, that's the core.\n\n[Verse 2 - buried]\n@voice am_michael\n(slot 2)\nI'm buried, I'm the mumble,\nFourteen under, humble,\nThe hats are like a jungle,\nMy words begin to crumble.\nA whisper in the thunder,\nThe kick is pulling under.\nTwo sounds in the same cellar,\nAnd neither one gets clearer.\n\n[Hook]\n@voice af_bella\n(slot auto)\nTuck it in and let the drums stand tall,\nCut the mud and let the kick come through,\nLift the beat when the lines recall,\nSit inside it, that's the move.\n(break 2)\n\n[Verse 3 - the pocket]\n@voice af_heart\nThree or four decibels under, that's the pocket,\nDon't mock it, lock it, tuck the voice and dock it,\nThen stop.\nSo set the gain per style, the trap comes down,\nA different sound, a different ground, same crown,\nThen shelve the low end off the voice, twelve down,\nLess brown, less drown, the kick can move around.\nFrom seven over down to under two,\nComes through.\nAnd when the hook comes back, the beat should bloom,\nA lift, a little air, and back to you.\nSet it by the meter, not by pride, and let it pour.\n\n[Hook - last time]\n@voice af_bella\nTuck it in and let the drums stand tall,\nCut the mud and let the kick come through,\nLift the beat when the lines recall,\nSit inside it, that's the move.\nIn the mix, not on it, room for all,\nIn the mix, not on it, room for all.\n",
+  "made_with": {
+    "tool": "lyric sheet written in a Claude Code session; rendered locally with sing.py (audio kept outside the repository)",
+    "model": "claude-fable-5-2",
+    "at": "2026-11-14T18:07:38-07:00"
+  },
+  "source_links": [
+    "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice",
+    "file:docs/roadmap.md#voice-tone-brightness-air-body"
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T18:07:38-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

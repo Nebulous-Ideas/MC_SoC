@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "incident-llm-deep-context-corruption",
+  "memory_ref": "outline:25a425fb-9f02-4360-b16b-31b4ab064a7c",
+  "source": {
+    "kind": "incident",
+    "system": "outline",
+    "ref": "https://outline.example.org/doc/example-runbook",
+    "observed_at": "2026-08-26T00:00:00-07:00"
+  },
+  "what_happened": "A local coding agent started mangling exact strings (ssh flags, paths, address octets) once its conversation passed roughly 100k tokens. The first suspect was the quantised key-value cache. A test with full-precision cache reproduced the same garbling, so that suspect was cleared. The model's own reasoning trace showed it noticing the damage and spiralling while trying to copy the text exactly.",
+  "lesson": "When a long session starts to corrupt exact strings, the cause can be depth itself, not a setting you can flip. The only reliable lever found was to compact or restart before the session gets deep. Test the favourite theory properly, and be willing to cross it off.",
+  "tags": [
+    "llm",
+    "context-depth",
+    "diagnosis"
+  ],
+  "form_hint": [
+    "spoken-rhyme",
+    "skit"
+  ],
+  "evidence": [
+    {
+      "claim": "Corruption appeared at roughly 100k tokens of conversation depth",
+      "ref": "https://outline.example.org/doc/example-runbook"
+    },
+    {
+      "claim": "Full-precision cache reproduced the same garbling, ruling out cache quantisation",
+      "ref": "https://outline.example.org/doc/example-runbook"
+    },
+    {
+      "claim": "Compacting or restarting before roughly 80-100k tokens is the only known mitigation",
+      "ref": "https://outline.example.org/doc/example-runbook"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credential, key or token values, no addresses or URL credentials",
+    "checked_at": "2026-11-11T12:00:00-08:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-11T19:33:51Z",
+    "note": "more testing"
+  }
+}

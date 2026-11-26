@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Derived work",
+  "description": "Content made from approved lessons (a skit, hook, post or rhyme). Always links back to its lessons. Has its own redaction scan and its own human sign-off: generated text can add things the lesson did not have.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "form", "lesson_ids", "status", "content", "redaction", "signoff"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "form": {"enum": ["spoken-rhyme", "sung-hook", "skit", "post"]},
+    "lesson_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "every lesson must exist and be approved"},
+    "release": {"type": "string", "description": "name of the release the lessons came from"},
+    "persona": {"type": "string", "description": "persona card used, by label"},
+    "status": {"enum": ["draft", "approved", "published"]},
+    "content": {"type": "string", "minLength": 1, "description": "the text itself (our own words)"},
+    "made_with": {"type": "object", "additionalProperties": false, "properties": {
+      "tool": {"type": "string"}, "model": {"type": "string"}, "at": {"type": "string", "format": "date-time"}}},
+    "source_links": {"type": "array", "items": {"type": "string"}, "description": "links shown with the work so readers can check it"},
+    "redaction": {"type": "object", "additionalProperties": false, "required": ["status"], "properties": {
+      "status": {"enum": ["pending", "passed", "failed"]}, "method": {"type": "string"}, "checked_at": {"type": "string", "format": "date-time"}}},
+    "signoff": {"type": "object", "additionalProperties": false, "required": ["status"], "properties": {
+      "status": {"enum": ["pending", "approved", "rejected"]}, "by": {"type": "string"}, "at": {"type": "string", "format": "date-time"},
+      "channel": {"enum": ["memory-system", "chat"]}, "note": {"type": "string"}, "note_model": {"type": "string"}}}
+  }
+}

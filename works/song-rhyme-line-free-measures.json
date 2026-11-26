@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "song-rhyme-line-free-measures",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "history-rhyme-line-free-measures"
+  ],
+  "status": "draft",
+  "content": "[Verse 1 - the single]\n@voice am_michael\n(break 2)\n(slot 2)\nI'm simple, I'm the single,\nOne vowel, one jingle,\nThe cat sat on the mat,\nThe hat was on the cat.\nThe sun is up, it's hot,\nI like the sun a lot.\nThe day is long and bright,\nI stay up half the night,\nNo echo in the middle,\nNo answer to the riddle.\nThe rhyme is fine, it's simple,\nOne dot, without a ripple.\n\n[Hook]\n@voice bm_george\n(slot auto)\nNear and far, let the vowels chain,\n(they chain!)\nTwo or more at the end of the line,\nHide a few in the middle lane,\n(the lane!)\nStack them up and let them shine.\n(break 2)\n\n[Verse 2 - the fix]\n@voice af_heart\nThe cat's an acrobat inside its habitat,\nThe hat's an artefact, a matter of fact, in fact,\nStack on stack.\nThe sun is up, the summer's undercover, humming,\nThe oven of the morning, something's coming, drumming,\nThe daylight stays, the grey light plays till late,\nThen waits.\nSame cat, same hat, same sun, the same old day,\nThe only thing I changed in here was how the vowels play.\n\n[Verse 3 - the chain]\n@voice af_bella\nA rhyme is not just end of line and done,\nIt's vowels in a chain, and more than one,\nA near rhyme lands inside six syllables,\nA far one waits, it's patient, it's invisible,\nThen lands.\nTwo vowels matched, the ending's getting stronger,\nThree vowels matched, the chain is running longer,\nSo stack them in the middle, not just corners of the bar.\n\n[Hook]\n@voice bm_george\nNear and far, let the vowels chain,\n(they chain!)\nTwo or more at the end of the line,\nHide a few in the middle lane,\n(the lane!)\nStack them up and let them shine.\nInside rhyme, outside rhyme, same refrain,\nInside rhyme, outside rhyme, same refrain.\n(break 2)\n\n[Bridge]\n@voice bm_george\nIt's woven in the ears now,\nThe vowels come in threes,\nNobody counts the partners there,\nThey only feel the pull.\n\n[Outro]\n@voice af_heart\nNear and far, let the vowels chain,\nInside rhyme, outside rhyme, same refrain.\n",
+  "made_with": {
+    "tool": "lyric sheet written in a Claude Code session; rendered locally with sing.py (audio kept outside the repository)",
+    "model": "claude-fable-5-2",
+    "at": "2026-11-14T18:07:38-07:00"
+  },
+  "source_links": [
+    "file:docs/roadmap.md#rhyme-measures-that-need-no-line-ends"
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T18:07:38-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

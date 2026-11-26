@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "history-pace-follows-mood",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b",
+    "observed_at": "2026-11-13T00:00:00-08:00"
+  },
+  "what_happened": "We compared tracks by the same artist that editors had labelled driving with ones labelled calm. On the separated voice, the driving tracks were about ten percent faster in syllables per second, in 10 of 12 artists, and again in a second draw with no track in common. The rhyme measures did not follow mood at all.",
+  "lesson": "Pace carries mood. The same voice goes only about a tenth faster for a driving track than for a calm one; it does not need to double.",
+  "tags": [
+    "voice",
+    "pace",
+    "mood",
+    "measurement"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "Driving-labelled rap tracks are about 10% faster than the same artist's calm-labelled ones in 10 of 12 artists, in each of two draws with no track in common",
+      "ref": "file:docs/roadmap.md#instrument-validation-against-planted-truth"
+    },
+    {
+      "claim": "Within an artist, the rhyme measures on published text do not follow mood (11 artists)",
+      "ref": "file:docs/roadmap.md#instrument-validation-against-planted-truth"
+    },
+    {
+      "claim": "The pace measure reads 0.92 to 1.06 of a planted speed change",
+      "ref": "file:docs/roadmap.md#instrument-validation-against-planted-truth"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T14:54:24-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-14T22:01:10Z"
+  },
+  "memory_ref": "outline:1c148c70-3e56-4cf6-86c4-0a9a71266c3a"
+}

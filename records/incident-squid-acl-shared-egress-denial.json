@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "incident-squid-acl-shared-egress-denial",
+  "source": {
+    "kind": "incident",
+    "system": "outline",
+    "ref": "https://outline.example.org/doc/example-runbook",
+    "observed_at": "2026-09-04T11:52:54-07:00"
+  },
+  "what_happened": "Image pulls on a logging host failed intermittently with a registry access-forbidden error. Every registry failed at once, the public ones and the private one alike. The egress proxy's access control was evaluated before its general allow rules and denied anonymous requests that had no explicit policy. The proxy later restarted cleanly, and pulls worked straight after a manual restart. The trigger that made the denials start was never found. Why tunnelled HTTPS requests were denied at all is also unexplained, since the helper's logic should allow them.",
+  "lesson": "When one error appears against every upstream at once, suspect the shared path, not each account. The tell here was the pattern, not the message. A restart that works is not a root cause, and the write-up should list what is still unknown beside the fix.",
+  "tags": [
+    "egress",
+    "proxy",
+    "diagnosis",
+    "open-question"
+  ],
+  "form_hint": [
+    "spoken-rhyme",
+    "skit"
+  ],
+  "evidence": [
+    {
+      "claim": "Pulls failed with the same forbidden error across every registry at the same time",
+      "ref": "https://outline.example.org/doc/example-runbook"
+    },
+    {
+      "claim": "The access-control rule was evaluated before the general allow rules, so unmatched requests were denied",
+      "ref": "https://outline.example.org/doc/example-runbook"
+    },
+    {
+      "claim": "A manual proxy restart made pulls succeed; the trigger was not identified",
+      "ref": "https://outline.example.org/doc/example-runbook"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "checked by a person in chat for the JSON text; to be checked again before any release",
+    "checked_at": "2026-11-15T00:00:00-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-15T23:43:06Z"
+  },
+  "memory_ref": "outline:e0affe91-afe2-438b-bad3-8269bc8b56ae"
+}

@@ -1,0 +1,23 @@
+{
+ "seed": 7,
+ "min_seconds": 120,
+ "max_seconds": 360,
+ "max_per_artist": 3,
+ "min_artists": 2,
+ "require_tags": [],
+ "exclude_tags": [
+  "live"
+ ],
+ "sides": {
+  "s1": {
+   "tags_all": [
+    "spoken"
+   ]
+  },
+  "s2": {
+   "tags_all": [
+    "sung"
+   ]
+  }
+ }
+}

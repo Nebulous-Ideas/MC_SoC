@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "practice-sign-off",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "history-pace-follows-mood"
+  ],
+  "status": "draft",
+  "content": "[Verse 1 - practice]\n@voice af_heart\n(break 2)\n(slot 4)\nThe pace is syllables a second,\nThree and a half, the middle reckoned,\nThe same voice slows to fit the feeling,\nA calm track wide, a touch of healing.\nEase it down when the lights are low,\nLet every word land nice and slow,\nNo hurry in a quiet room,\nThe mood decides, and not the tune.\n\n[Verse 2 - driving]\n@voice am_michael\n(slot 2)\nNow the engine's turning,\nNow the road is burning,\nTen percent ahead,\nThat's how numbers run.\nTen tracks out of twelve,\nCheck the count yourself,\nNot double, not a sprint,\nA lean, a little hint.\nSpeed it up, stay clear,\nEvery word in place,\nDriving, never blurred,\nYou still catch each word.\n\n[Hook]\n@voice bm_george\n(slot auto)\nSlow it down when the night is still,\n(be still!)\nSpeed it up when the engine turns,\nMatch the pace to the thing you feel,\n(you feel!)\nTen percent is all it earns.\n(break 2)\n\n[Verse 3 - wrong gear]\n@voice am_michael\n(slot 2)\nI'm rushing, I'm the hurry,\nEach line a little blurry,\nA lullaby, I'm sprinting,\nA lullaby, I'm sprinting,\nWords are out and scattered,\nLike no feeling mattered.\nOne gear for each story,\nSad ones and the glory.\n\n[Verse 4 - the fix]\n@voice af_heart\n(slot auto)\nSo ask the song what kind of day it's having,\nThen pick a pace, no grabbing and no stabbing,\nHold it even.\nA calm one sits around three and a half,\nA driving one adds ten percent, not half.\nSame voice, same breath, same mouth, the same old tongue,\nThe only thing I changed in here was how fast it was sung.\nStay small.\n\n[Hook - last time]\n@voice bm_george\nSlow it down when the night is still,\n(be still!)\nSpeed it up when the engine turns,\nMatch the pace to the thing you feel,\n(you feel!)\nTen percent is all it earns.\nCalm or driving, same voice, same skill,\nCalm or driving, same voice, same skill.\n(break 2)\n\n[Outro]\n@voice af_heart\n(slot 4)\nCalm or driving, same voice, same skill,\nSlow it down when the night is still.\n",
+  "made_with": {
+    "tool": "lyric sheet written in a Claude Code session; rendered locally with sing.py (audio kept outside the repository)",
+    "model": "claude-fable-5-2",
+    "at": "2026-11-14T18:07:38-07:00"
+  },
+  "source_links": [
+    "file:docs/roadmap.md#instrument-validation-against-planted-truth"
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T18:07:38-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

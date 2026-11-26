@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "history-voice-breath-phrasing",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b",
+    "observed_at": "2026-11-14T00:00:00-08:00"
+  },
+  "what_happened": "Our synthetic voice sounded choppy. Measured on the separated voice, its typical phrase lasted 0.67 seconds and its longest 1.22 seconds, both under what real rap recordings do. The voice was uncompressed and dipped inside every line, so each dip counted as a pause. Running lines together and evening out the level brought the typical phrase to about one second, inside the real range.",
+  "lesson": "A phrase needs room: about a second of unbroken voice, around two short pauses a bar, and a quarter of the time left empty. Carry the line on one breath instead of chopping every word.",
+  "tags": [
+    "voice",
+    "breath",
+    "phrasing",
+    "measurement"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "On 467 real hip hop tracks the median phrase is 1.09 s (5th to 95th percentile 0.80 to 1.85 s), with 2.22 pauses per bar and 0.25 of the time paused",
+      "ref": "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+    },
+    {
+      "claim": "Our render before the change had a median phrase of 0.67 s and a longest phrase of 1.22 s",
+      "ref": "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+    },
+    {
+      "claim": "After run-on lines and a 4:1 voice compressor the median phrase was 1.04 s and all nine breath measures sat inside the real range",
+      "ref": "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+    },
+    {
+      "claim": "The pause measure found 0.97 of 4793 planted pauses",
+      "ref": "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T14:54:24-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-14T22:00:15Z"
+  },
+  "memory_ref": "outline:7b117534-16dc-4324-ae84-24615c379808"
+}

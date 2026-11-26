@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "song-heteronym-inline-marker",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "history-heteronym-inline-marker"
+  ],
+  "status": "draft",
+  "content": "[Stinger - open]\n@voice bm_george\n(break 2)\nOne spelling, two tellings.\n\n[Verse 1 - two tellings]\n@voice af_heart\n(slot auto)\nOne spelling, two tellings, the letters never change,\nThe engine picks one, and the meaning rearranges,\nStrange exchanges,\nPlain and dangerous.\nI read{reed} it today, and I read{red} it last night,\nSame four letters on the page, but only one is right,\nHindsight.\nA lead{leed} in the band, or the lead{led} in the pipe,\nA tear{tare} in the page, or a tear{tier} that you wipe,\nThe spelling is a stencil, sound's another stripe,\nSame type.\nSo tell the mouth which one you mean before it hits the mic.\n\n[Verse 2 - the engine guessing]\n@voice am_michael\n(slot 2)\nI'm guessing, I'm the engine,\nNo context, no attention,\nI read{reed} it last evening,\nThe lead{leed} pipe is leaking,\nA tear{tier} in the paper,\nA bow{bough} tied on the wrapper,\nI wind{winned} the clock later,\nEach one a little vapour.\n\n[Verse 3 - the fix]\n@voice af_heart\n(slot auto)\nSo mark it in the margin, put the sound in braces,\nThe cases get their faces, no more empty spaces,\nName and place it.\nI read{red} it last evening, the lead{led} pipe is leaking,\nA tear{tare} in the paper, hear the meaning speaking,\nA bow{beau} tied on the wrapper, wind{wined} the clock later,\nGreater.\nSame voice, same page, same line, the same intent,\nThe only thing I changed in here was telling what I meant.\nA sound that's marked will always beat a guessed one,\nLesson.\nIt reads the sign, and then it says the best one.\n\n[Hook]\n@voice bm_george\nSame word, two sounds, say which one,\n(which one!)\nMark the sound before the take is run,\nBow{beau} on the gift, bow{bough} when it's done,\n(it's done!)\nWrite it how it's said, not how it's spun.\nOne spelling, two tellings, pick the one,\nOne spelling, two tellings, pick the one.\n(break 2)\n\n[Bridge]\n@voice af_bella\nIt's quiet in the booth now,\nThe words come out as planned,\nThe letters and the meaning,\nAre walking hand in hand.\nNobody hears the mark you made,\nThey only hear the word.\n\n[Hook - last time]\n@voice bm_george\nSame word, two sounds, say which one,\n(which one!)\nMark the sound before the take is run,\nBow{beau} on the gift, bow{bough} when it's done,\n(it's done!)\nWrite it how it's said, not how it's spun.\nOne spelling, two tellings, pick the one,\nOne spelling, two tellings, pick the one.\n",
+  "made_with": {
+    "tool": "lyric sheet written in a Claude Code session; rendered locally with sing.py (audio kept outside the repository)",
+    "model": "claude-fable-5-2",
+    "at": "2026-11-14T18:07:38-07:00"
+  },
+  "source_links": [
+    "file:docs/roadmap.md#voice-tone-brightness-air-body"
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T18:07:38-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

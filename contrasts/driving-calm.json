@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "contrast": "driving-calm",
+  "kind": "mood-contrast",
+  "sides": {"a": "driving", "b": "calm"},
+  "basis": {
+    "evidence": "editorial mood labels from a media server, outside the measures",
+    "unit": "within-artist median of side a minus side b, separated rap voices",
+    "min_artists": 8,
+    "roadmap": "Editorial mood labels as outside evidence (2026-11-13)"
+  },
+  "measures": {
+    "heard_syl_per_active_s": {"status": "replicated", "expect": "higher", "diffs": [0.34, 0.29], "artists_positive": [10, 10], "artists": [12, 12]},
+    "npitch_sd_st": {"status": "not shown", "diffs": [0.30], "artists_positive": [7], "artists": [12]}
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Lesson record",
+  "description": "The one record both streams become. Source-agnostic: any source adapter emits it, any memory-system adapter stores it. Canonical copy lives in the memory system (Outline first); the local copy under records/ is a cache the Python side runs on.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "source", "what_happened", "lesson", "evidence", "redaction", "signoff"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "memory_ref": {"type": "string", "description": "where the canonical copy lives in the memory system (Outline doc URL or id); optional until the record is pushed"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "system", "ref"],
+      "properties": {
+        "kind": {"enum": ["incident", "news", "history"], "description": "history = this homelab's own past, read from the memory system"},
+        "system": {"type": "string", "minLength": 1, "description": "adapter name: kuma, graylog, outline, a publication name; the core never branches on it"},
+        "ref": {"type": "string", "minLength": 1, "description": "link or id back to the original; never a copy of it"},
+        "observed_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "what_happened": {"type": "string", "minLength": 1, "description": "restated in our own words"},
+    "lesson": {"type": "string", "minLength": 1},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "form_hint": {"type": "array", "items": {"enum": ["spoken-rhyme", "sung-hook", "skit"]}, "description": "suggested content forms; Decide may ignore"},
+    "persona": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "optional persona card input, chosen by trait; no real artist names",
+      "properties": {
+        "card": {"type": "string"},
+        "traits": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "description": "each factual claim in the lesson with where it can be checked",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "ref"],
+        "properties": {"claim": {"type": "string", "minLength": 1}, "ref": {"type": "string", "minLength": 1}}
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {"enum": ["pending", "passed", "failed"]},
+        "method": {"type": "string", "description": "by value, not by field name"},
+        "checked_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "signoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "description": "Set by a person through the memory system (back and forth in Outline). Unattended CLI runs are generate-only and never write approved.",
+      "properties": {
+        "status": {"enum": ["pending", "approved", "rejected"]},
+        "by": {"type": "string"},
+        "at": {"type": "string", "format": "date-time"},
+        "channel": {"enum": ["memory-system", "chat"]},
+        "note": {"type": "string", "description": "typed by the approving person"},
+        "note_model": {"type": "string", "description": "comment supplied by the assistant; never counts as the human's words"}
+      }
+    }
+  }
+}

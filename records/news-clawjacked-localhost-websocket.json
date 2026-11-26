@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "news-clawjacked-localhost-websocket",
+  "memory_ref": "outline:f6d028dc-cd28-4bfb-b63f-4bb7ffe90fc0",
+  "source": {
+    "kind": "news",
+    "system": "The Hacker News",
+    "ref": "https://thehackernews.com/2026/02/clawjacked-flaw-lets-malicious-sites.html",
+    "observed_at": "2026-11-11T00:00:00-08:00"
+  },
+  "what_happened": "A flaw nicknamed ClawJacked in a popular open-source AI agent let an ordinary website take over the agent running on someone's own machine. The page opened a connection to the agent's local port, guessed its password, and then gave the agent orders. The researchers who found it reported it, and a fix shipped within a day.",
+  "lesson": "Local-only does not mean safe. Anything you run on localhost can be reached by a browser tab, so a local agent needs a real password, a limit on guesses, and a check on who is calling.",
+  "tags": [
+    "ai-agents",
+    "localhost",
+    "authentication"
+  ],
+  "form_hint": [
+    "sung-hook",
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "A malicious website could connect to the agent's gateway on localhost over a WebSocket and brute-force its password",
+      "ref": "https://thehackernews.com/2026/02/clawjacked-flaw-lets-malicious-sites.html"
+    },
+    {
+      "claim": "The vendor fixed it within about 24 hours of the report",
+      "ref": "https://thehackernews.com/2026/02/clawjacked-flaw-lets-malicious-sites.html"
+    },
+    {
+      "claim": "The fix is in version 2026.2.25 or later",
+      "ref": "https://thehackernews.com/2026/02/clawjacked-flaw-lets-malicious-sites.html"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py; restated, no text copied from the article",
+    "checked_at": "2026-11-11T12:00:00-08:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

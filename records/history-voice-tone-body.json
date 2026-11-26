@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "history-voice-tone-body",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b",
+    "observed_at": "2026-11-14T00:00:00-08:00"
+  },
+  "what_happened": "We measured the tone of the voice in three parts: body in the low band, brightness, and air at the top. Brightness and air were inside what real recordings show. Body was far outside: the voice carried too much low end and competed with the kick. A low shelf cut on the voice alone brought body inside, and nothing else had to change.",
+  "lesson": "Check tone in parts before changing anything. Ours had one fault, too much low end in the voice, and one cut fixed it; the bright end was already fine.",
+  "tags": [
+    "voice",
+    "tone",
+    "equalisation",
+    "measurement"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "Body on real hip hop voices runs -8.30 to 2.76 dB (5th to 95th percentile, median -2.11); ours read 7.79 dB",
+      "ref": "file:docs/roadmap.md#voice-tone-brightness-air-body"
+    },
+    {
+      "claim": "Tilt (-13.61 dB), air (-21.93 dB) and flatness (0.04) on our render were inside the real ranges",
+      "ref": "file:docs/roadmap.md#voice-tone-brightness-air-body"
+    },
+    {
+      "claim": "After a 12 dB low shelf cut at 250 Hz body read 1.83 dB, measured on the clean voice only",
+      "ref": "file:docs/roadmap.md#voice-tone-brightness-air-body"
+    },
+    {
+      "claim": "Seven of eight planted tone checks pass; movement of tone over time fails and is not used",
+      "ref": "file:docs/roadmap.md#voice-tone-brightness-air-body"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T14:54:24-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-14T22:00:52Z"
+  },
+  "memory_ref": "outline:77b1948e-3516-40d4-b00c-8f11ff57cdb3"
+}

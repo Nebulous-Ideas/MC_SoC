@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "card": "fast-straight",
+  "kind": "beat",
+  "n_tracks": 11,
+  "traits": [
+    "tempo:fast",
+    "feel:straight"
+  ],
+  "measured": {
+    "bpm": {
+      "p10": 97.5,
+      "median": 100.0,
+      "p90": 118.0
+    },
+    "swing": {
+      "p10": 0.46,
+      "median": 0.47,
+      "p90": 0.48
+    },
+    "lufs": {
+      "p10": -9.9,
+      "median": -9.1,
+      "p90": -8.3
+    },
+    "lra": {
+      "p10": 1.4,
+      "median": 1.9,
+      "p90": 4.0
+    }
+  },
+  "thresholds": {
+    "tempo_fast_min": 96.5,
+    "tempo_slow_max": 88.0,
+    "swing_swung_min": 0.51,
+    "straight_max": 0.49
+  }
+}

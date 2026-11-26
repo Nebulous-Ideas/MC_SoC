@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "card": "rapid-melodic",
+  "kind": "voice",
+  "n_tracks": 7,
+  "traits": [
+    "pace:fast",
+    "delivery:melodic"
+  ],
+  "measured": {
+    "heard_syl_per_active_s": {
+      "p10": 4.22,
+      "median": 4.34,
+      "p90": 4.6
+    },
+    "npitch_sd_st": {
+      "p10": 2.57,
+      "median": 2.65,
+      "p90": 3.05
+    },
+    "npitch_span_st": {
+      "p10": 10.1,
+      "median": 13.0,
+      "p90": 17.2
+    },
+    "pause_share_pct": {
+      "p10": 3.6,
+      "median": 8.8,
+      "p90": 13.0
+    }
+  },
+  "form_hint": [
+    "spoken-rhyme",
+    "sung-hook"
+  ],
+  "thresholds": {
+    "heard_pace_fast_min": 4.22,
+    "heard_pace_slow_max": 3.8,
+    "spread_melodic_min": 2.57,
+    "spread_flat_max": 2.13
+  }
+}

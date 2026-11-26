@@ -1,0 +1,342 @@
+{
+ "schema_version": 1,
+ "kind": "crate",
+ "id": "crate-3a0231281992",
+ "universe": {
+  "purpose": "delivery-reference",
+  "measured_on": "unspecified",
+  "analyzer": "flow-tsv",
+  "analyzer_version": "2",
+  "calibration": "none"
+ },
+ "formed_by": "operator",
+ "sides": {
+  "s1": {
+   "count": 7,
+   "groups": 2,
+   "content_hash": "7087e96a5f4482c7b34d60ac5b9768c9d36c4163b0dfed71e7466fe011bcf0fe",
+   "profile": {
+    "seconds": {
+     "p10": 178.8,
+     "median": 240.0,
+     "p90": 298.6
+    },
+    "voiced_pct": {
+     "p10": 65.4,
+     "median": 72.0,
+     "p90": 75.2
+    },
+    "syl_per_voiced_s": {
+     "p10": 4.16,
+     "median": 4.46,
+     "p90": 5.732
+    },
+    "syl_per_s": {
+     "p10": 2.862,
+     "median": 3.29,
+     "p90": 4.13
+    },
+    "phrase_gap_s": {
+     "p10": 0.426,
+     "median": 0.47,
+     "p90": 0.528
+    },
+    "pitch_sd_st": {
+     "p10": 2.856,
+     "median": 3.07,
+     "p90": 3.438
+    },
+    "pitch_step_st": {
+     "p10": 1.748,
+     "median": 1.89,
+     "p90": 2.396
+    },
+    "pitch_span_st": {
+     "p10": 12.48,
+     "median": 15.6,
+     "p90": 22.06
+    },
+    "flat_pct": {
+     "p10": 33.4,
+     "median": 37.0,
+     "p90": 38.4
+    },
+    "active_s": {
+     "p10": 142.58,
+     "median": 181.9,
+     "p90": 229.22
+    },
+    "heard_syl_per_active_s": {
+     "p10": 3.548,
+     "median": 4.15,
+     "p90": 5.372
+    },
+    "heard_cover_pct": {
+     "p10": 78.0,
+     "median": 92.0,
+     "p90": 95.0
+    },
+    "pause_share_pct": {
+     "p10": 7.14,
+     "median": 8.8,
+     "p90": 22.28
+    },
+    "pauses_per_min": {
+     "p10": 6.74,
+     "median": 9.6,
+     "p90": 15.4
+    },
+    "npitch_median_st": {
+     "p10": 49.1,
+     "median": 51.36,
+     "p90": 55.116
+    },
+    "npitch_sd_st": {
+     "p10": 2.376,
+     "median": 2.57,
+     "p90": 2.816
+    },
+    "npitch_step_st": {
+     "p10": 0.862,
+     "median": 1.26,
+     "p90": 1.822
+    },
+    "npitch_span_st": {
+     "p10": 11.38,
+     "median": 16.5,
+     "p90": 23.28
+    }
+   }
+  },
+  "s2": {
+   "count": 34,
+   "groups": 5,
+   "content_hash": "8c4208b86442178e73b3afe4ffe6ed1e7262952be1a3883e974990e9f00fb005",
+   "profile": {
+    "seconds": {
+     "p10": 161.5,
+     "median": 232.0,
+     "p90": 287.2
+    },
+    "voiced_pct": {
+     "p10": 57.3,
+     "median": 74.0,
+     "p90": 84.0
+    },
+    "syl_per_voiced_s": {
+     "p10": 3.195,
+     "median": 4.385,
+     "p90": 4.898
+    },
+    "syl_per_s": {
+     "p10": 2.196,
+     "median": 3.155,
+     "p90": 3.776
+    },
+    "phrase_gap_s": {
+     "p10": 0.373,
+     "median": 0.43,
+     "p90": 0.597
+    },
+    "pitch_sd_st": {
+     "p10": 2.234,
+     "median": 2.78,
+     "p90": 3.638
+    },
+    "pitch_step_st": {
+     "p10": 1.225,
+     "median": 1.715,
+     "p90": 2.235
+    },
+    "pitch_span_st": {
+     "p10": 10.55,
+     "median": 14.45,
+     "p90": 20.45
+    },
+    "flat_pct": {
+     "p10": 33.3,
+     "median": 41.5,
+     "p90": 50.0
+    },
+    "active_s": {
+     "p10": 130.75,
+     "median": 195.4,
+     "p90": 243.65
+    },
+    "heard_syl_per_active_s": {
+     "p10": 2.621,
+     "median": 4.115,
+     "p90": 4.594
+    },
+    "heard_cover_pct": {
+     "p10": 78.0,
+     "median": 87.0,
+     "p90": 95.7
+    },
+    "pause_share_pct": {
+     "p10": 3.78,
+     "median": 16.4,
+     "p90": 30.37
+    },
+    "pauses_per_min": {
+     "p10": 4.66,
+     "median": 8.8,
+     "p90": 19.85
+    },
+    "npitch_median_st": {
+     "p10": 44.963,
+     "median": 52.905,
+     "p90": 56.509
+    },
+    "npitch_sd_st": {
+     "p10": 1.839,
+     "median": 2.22,
+     "p90": 2.929
+    },
+    "npitch_step_st": {
+     "p10": 0.851,
+     "median": 1.305,
+     "p90": 1.817
+    },
+    "npitch_span_st": {
+     "p10": 9.14,
+     "median": 12.5,
+     "p90": 23.15
+    }
+   }
+  }
+ },
+ "membership": "chosen",
+ "relationship": {
+  "kind": "contrast",
+  "orientation": "positive_means_first_side_higher",
+  "confidence": "low",
+  "separability": 0.7542,
+  "distinctness": 0.7542,
+  "carriers": [],
+  "leaning": [
+   "flat_pct"
+  ],
+  "evidence": "exploratory",
+  "pairs": [
+   {
+    "a": "s1",
+    "b": "s2",
+    "features": {
+     "seconds": {
+      "effect": 0.1008,
+      "group_effect": 0.6,
+      "overlap": 0.5252,
+      "p": 0.380952
+     },
+     "voiced_pct": {
+      "effect": -0.1471,
+      "group_effect": -0.2,
+      "overlap": 0.4412,
+      "p": 0.857143
+     },
+     "syl_per_voiced_s": {
+      "effect": 0.3277,
+      "group_effect": 0.0,
+      "overlap": 0.2899,
+      "p": 1.0
+     },
+     "syl_per_s": {
+      "effect": 0.2605,
+      "group_effect": 0.2,
+      "overlap": 0.2899,
+      "p": 0.857143
+     },
+     "phrase_gap_s": {
+      "effect": 0.1513,
+      "group_effect": 0.2,
+      "overlap": 0.4916,
+      "p": 0.857143
+     },
+     "pitch_sd_st": {
+      "effect": 0.3613,
+      "group_effect": -0.2,
+      "overlap": 0.3235,
+      "p": 0.857143
+     },
+     "pitch_step_st": {
+      "effect": 0.3487,
+      "group_effect": 0.4,
+      "overlap": 0.2059,
+      "p": 0.571429
+     },
+     "pitch_span_st": {
+      "effect": 0.2227,
+      "group_effect": -0.2,
+      "overlap": 0.3487,
+      "p": 0.857143
+     },
+     "flat_pct": {
+      "effect": -0.5084,
+      "group_effect": -0.8,
+      "overlap": 0.2353,
+      "p": 0.190476
+     },
+     "active_s": {
+      "effect": -0.0504,
+      "group_effect": 0.2,
+      "overlap": 0.3529,
+      "p": 0.857143
+     },
+     "heard_syl_per_active_s": {
+      "effect": 0.1555,
+      "group_effect": -0.2,
+      "overlap": 0.5588,
+      "p": 0.857143
+     },
+     "heard_cover_pct": {
+      "effect": 0.1176,
+      "group_effect": 0.2,
+      "overlap": 0.4664,
+      "p": 0.857143
+     },
+     "pause_share_pct": {
+      "effect": -0.0924,
+      "group_effect": -0.2,
+      "overlap": 0.2647,
+      "p": 0.857143
+     },
+     "pauses_per_min": {
+      "effect": 0.2479,
+      "group_effect": 0.4,
+      "overlap": 0.2941,
+      "p": 0.571429
+     },
+     "npitch_median_st": {
+      "effect": -0.1261,
+      "group_effect": 0.0,
+      "overlap": 0.3235,
+      "p": 1.0
+     },
+     "npitch_sd_st": {
+      "effect": 0.3782,
+      "group_effect": 0.2,
+      "overlap": 0.2647,
+      "p": 0.857143
+     },
+     "npitch_step_st": {
+      "effect": -0.1807,
+      "group_effect": 0.2,
+      "overlap": 0.2941,
+      "p": 0.857143
+     },
+     "npitch_span_st": {
+      "effect": 0.2815,
+      "group_effect": 0.0,
+      "overlap": 0.4076,
+      "p": 1.0
+     }
+    }
+   }
+  ]
+ },
+ "confounds": {
+  "shared_groups": 0,
+  "matched_on": []
+ }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "song-voice-breath-phrasing",
+  "form": "spoken-rhyme",
+  "lesson_ids": [
+    "history-voice-breath-phrasing"
+  ],
+  "status": "draft",
+  "content": "[Intro]\n@voice bm_george\n(break 2)\n\n[Verse 1 - the phrase]\n@voice af_heart\n(slot auto)\nI used to chop each word like it was kindling,\nA little dip in every single syllable,\nThe line kept dwindling,\nThin and brittle.\nA second, that's the middle of a phrase,\nOne breath to carry all it has to say,\nThen pause.\nTwo small gaps to a bar, that's all it takes,\nA quarter of the time is empty space.\nThe quiet isn't lazy, it's the frame,\nNo shame.\nSo run the words together, let them ride on the same air.\n\n[Hook]\n@voice bm_george\nTake it in and let the line run long,\n(run long!)\nLeave a gap and let the beat come through,\nDon't chop the word, just carry on,\n(carry on!)\nSay it once and let it move.\nOne breath, one phrase, room in the song,\nOne breath, one phrase, room in the song.\n(break 2)\n\n[Verse 2 - the chopper]\n@voice am_michael\n(slot 2)\nI'm stutter, I'm the chopper,\nEach word, a full stopper,\nGaps in every corner,\nNo phrase is getting longer.\nHalf a second, falter,\nHalf a second, falter,\nA sentence cut to pieces,\nThe meaning never reaches.\nThe voice dips, then it rises,\nThe meter thinks it's silence,\nA hundred tiny pauses,\nAnd no one knows the causes.\nThat's choppy, hear it dropping,\nIt's stopping, starting, stopping,\nThe level's off, it's simple,\nDips become a signal.\n\n[Hook]\n@voice bm_george\n(slot auto)\nTake it in and let the line run long,\n(run long!)\nLeave a gap and let the beat come through,\nDon't chop the word, just carry on,\n(carry on!)\nSay it once and let it move.\nOne breath, one phrase, room in the song,\nOne breath, one phrase, room in the song.\n(break 2)\n\n[Verse 3 - the fix]\n@voice af_heart\nSo squeeze the loud parts gently, lift the quiet,\nA flatter level, try it, don't deny it,\nHold it steady.\nThen join the lines that want to go together,\nLong phrase, short phrase, the pause is like a feather.\nFrom half a second up to one whole second,\nWell reckoned.\nSame voice, same words, same tempo, same old beat below,\nThe only thing I changed in here was where the breathing goes.\nA phrase that lasts will always beat a splinter,\nNo hurry.\nIt waits, it fills the lungs, and then delivers.\n\n[Bridge]\n@voice bm_george\nIt's easy on the ear now,\nThe words come out in streams,\nA pause where you expect it,\nA line with no torn seams.\nNobody counts the breaths you take,\nThey only hear the flow.\n\n[Hook - last time]\n@voice bm_george\nTake it in and let the line run long,\n(run long!)\nLeave a gap and let the beat come through,\nDon't chop the word, just carry on,\n(carry on!)\nSay it once and let it move.\nOne breath, one phrase, room in the song,\nOne breath, one phrase, room in the song.\n(break 2)\n\n[Outro]\n@voice af_heart\nTake it in and let the line run on,\nOne breath, one phrase, room in the song.\n",
+  "made_with": {
+    "tool": "lyric sheet written in a Claude Code session; rendered locally with sing.py (audio kept outside the repository)",
+    "model": "claude-fable-5-2",
+    "at": "2026-11-14T15:05:37-07:00"
+  },
+  "source_links": [
+    "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T15:05:50-07:00"
+  },
+  "signoff": {
+    "status": "pending"
+  }
+}

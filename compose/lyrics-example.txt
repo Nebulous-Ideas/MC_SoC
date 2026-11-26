@@ -1,0 +1,13 @@
+[Verse - example]
+@voice af_heart
+(slot 4)
+Check it twice before you ship,
+Count the words and mind the slip,
+Small and plain and fit the beat,
+Every line should land complete.
+
+[Hook]
+@voice bm_george
+(slot auto)
+Lint it, read it, hear it through,
+Then a person signs it too.

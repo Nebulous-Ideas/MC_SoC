@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "history-voice-level-in-mix",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b",
+    "observed_at": "2026-11-14T00:00:00-08:00"
+  },
+  "what_happened": "One beat level was used for every beat style. In one style the voice ended up 14 dB under the beat and could not be heard. Real recordings keep the voice a few decibels under the beat, and the beat rises where lines repeat; ours fell there instead. Setting the level per style and lifting the beat a little under repeated lines brought every style close to the real figure.",
+  "lesson": "The voice sits in the mix, not on top of it: a few decibels under the beat, set by a meter for each style, with the beat allowed to rise at the hook.",
+  "tags": [
+    "voice",
+    "mix",
+    "level",
+    "measurement"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "On real tracks the voice sits 3.66 dB under the beat at the median",
+      "ref": "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+    },
+    {
+      "claim": "With one beat gain for all styles the voice was 14 dB under the beat in one style; with a gain per style all six read -3.52 to -3.73 dB",
+      "ref": "file:docs/roadmap.md#breath-pauses-and-unbroken-runs-of-the-voice"
+    },
+    {
+      "claim": "Where lines repeat, real tracks rise by 0.13 (drums), 0.23 (bass) and 1.33 (other) at the median; ours read -1.99, -1.09 and -0.90 before a 2.5 dB lift and -0.46, 0.68 and 1.28 after",
+      "ref": "file:docs/roadmap.md#voice-tone-brightness-air-body"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T14:54:24-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-14T22:00:41Z"
+  },
+  "memory_ref": "outline:4dd9a3bb-565a-4711-8d89-fc3f9f81bb4a"
+}

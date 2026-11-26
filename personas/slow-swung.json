@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "card": "slow-swung",
+  "kind": "beat",
+  "n_tracks": 5,
+  "traits": [
+    "tempo:slow",
+    "feel:swung"
+  ],
+  "measured": {
+    "bpm": {
+      "p10": 70.0,
+      "median": 80.0,
+      "p90": 86.0
+    },
+    "swing": {
+      "p10": 0.51,
+      "median": 0.54,
+      "p90": 0.56
+    },
+    "lufs": {
+      "p10": -10.7,
+      "median": -8.4,
+      "p90": -7.6
+    },
+    "lra": {
+      "p10": 2.0,
+      "median": 2.1,
+      "p90": 2.4
+    }
+  },
+  "thresholds": {
+    "tempo_fast_min": 96.5,
+    "tempo_slow_max": 88.0,
+    "swing_swung_min": 0.51,
+    "straight_max": 0.49
+  }
+}

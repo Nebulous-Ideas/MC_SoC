@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "rapid-melodic-lead",
+  "voice": "af_heart",
+  "card": "rapid-melodic",
+  "beat": null,
+  "settings": {"bpm": 98, "beat_style": "boombap", "sing": ["--beat-gain", "5.75"]},
+  "note": "Settings from the 2026-11-16 render of the Squid work (boombap, 98 BPM, +5.75 dB). Not tuned for other sheets."
+}

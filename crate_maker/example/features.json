@@ -1,0 +1,220 @@
+{
+ "schema_version": 1,
+ "analyzer": "fake-analyzer",
+ "analyzer_version": "1",
+ "features": [
+  {
+   "name": "pace",
+   "unit": "syllables/s",
+   "description": "fake pace measure (example only)"
+  },
+  {
+   "name": "spread",
+   "unit": "semitones",
+   "description": "fake pitch spread (example only)"
+  }
+ ],
+ "rows": [
+  {
+   "id": "54ce359071c1",
+   "group": "440457ae",
+   "values": {
+    "pace": 5.24,
+    "spread": 1.68
+   }
+  },
+  {
+   "id": "164420a9579e",
+   "group": "440457ae",
+   "values": {
+    "pace": 4.88,
+    "spread": 1.91
+   }
+  },
+  {
+   "id": "23c3d2a76216",
+   "group": "440457ae",
+   "values": {
+    "pace": 4.99,
+    "spread": 2.94
+   }
+  },
+  {
+   "id": "407643aa209c",
+   "group": "440457ae",
+   "values": {
+    "pace": 5.65,
+    "spread": 1.87
+   }
+  },
+  {
+   "id": "21edebbfc5e7",
+   "group": "aeab9114",
+   "values": {
+    "pace": 5.48,
+    "spread": 2.1
+   }
+  },
+  {
+   "id": "bed51a1a82e1",
+   "group": "aeab9114",
+   "values": {
+    "pace": 5.32,
+    "spread": 2.23
+   }
+  },
+  {
+   "id": "22aa19612452",
+   "group": "aeab9114",
+   "values": {
+    "pace": 4.69,
+    "spread": 2.01
+   }
+  },
+  {
+   "id": "e8ddec69180f",
+   "group": "aeab9114",
+   "values": {
+    "pace": 4.21,
+    "spread": 2.26
+   }
+  },
+  {
+   "id": "2746ab46a906",
+   "group": "9b236888",
+   "values": {
+    "pace": 4.85,
+    "spread": 1.72
+   }
+  },
+  {
+   "id": "330fedca3d31",
+   "group": "9b236888",
+   "values": {
+    "pace": 5.62,
+    "spread": 2.17
+   }
+  },
+  {
+   "id": "af6949fe35ce",
+   "group": "9b236888",
+   "values": {
+    "pace": 4.73,
+    "spread": 2.34
+   }
+  },
+  {
+   "id": "86a6cad0d426",
+   "group": "9b236888",
+   "values": {
+    "pace": 4.57,
+    "spread": 2.34
+   }
+  },
+  {
+   "id": "aa76aba1b909",
+   "group": "18ff7201",
+   "values": {
+    "pace": 3.4,
+    "spread": 3.2
+   }
+  },
+  {
+   "id": "ed33134ac656",
+   "group": "18ff7201",
+   "values": {
+    "pace": 2.93,
+    "spread": 3.18
+   }
+  },
+  {
+   "id": "d6829ff89afc",
+   "group": "18ff7201",
+   "values": {
+    "pace": 3.22,
+    "spread": 2.99
+   }
+  },
+  {
+   "id": "38443dac78ce",
+   "group": "18ff7201",
+   "values": {
+    "pace": 3.87,
+    "spread": 3.08
+   }
+  },
+  {
+   "id": "63388fbd13ce",
+   "group": "ebf9bcb4",
+   "values": {
+    "pace": 2.8,
+    "spread": 3.53
+   }
+  },
+  {
+   "id": "4b2cf249b982",
+   "group": "ebf9bcb4",
+   "values": {
+    "pace": 3.12,
+    "spread": 3.25
+   }
+  },
+  {
+   "id": "91df758c54d3",
+   "group": "ebf9bcb4",
+   "values": {
+    "pace": 3.88,
+    "spread": 3.23
+   }
+  },
+  {
+   "id": "23be8af534cb",
+   "group": "ebf9bcb4",
+   "values": {
+    "pace": 3.69,
+    "spread": 3.27
+   }
+  },
+  {
+   "id": "3dd33b23e9f0",
+   "group": "a6f63302",
+   "values": {
+    "pace": 3.37,
+    "spread": 2.6
+   }
+  },
+  {
+   "id": "360cebbbce9b",
+   "group": "a6f63302",
+   "values": {
+    "pace": 4.05,
+    "spread": 3.45
+   }
+  },
+  {
+   "id": "5a3e3c1acb7b",
+   "group": "a6f63302",
+   "values": {
+    "pace": 3.15,
+    "spread": 3.26
+   }
+  },
+  {
+   "id": "6df1bf22388b",
+   "group": "a6f63302",
+   "values": {
+    "pace": 3.71,
+    "spread": 3.82
+   }
+  }
+ ],
+ "provenance": {
+  "method": "fake-example",
+  "measured_on": "reference",
+  "n_tracks": 24,
+  "calibration": {
+   "status": "none",
+   "n_tracks": 0
+  }
+ }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "history-heteronym-inline-marker",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b",
+    "observed_at": "2026-11-14T00:00:00-08:00"
+  },
+  "what_happened": "A speech engine picks one pronunciation for each spelling. In one of our renders the past tense of a common verb came out with the present-tense sound, and a speech-to-text check could not catch it because it writes the same letters for either sound. We added a text check that runs before a render, and a marker that lets a lyric sheet state the spoken form of one word in braces. A person listened to a render that used the marker and confirmed the words came out as intended.",
+  "lesson": "When one spelling has two sounds, say which one before the take: reword the line, or mark the spoken form. Do not rely on listening back by machine.",
+  "tags": [
+    "speech",
+    "pronunciation",
+    "lint",
+    "lyrics"
+  ],
+  "form_hint": [
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "A lyric sheet can write a word with its spoken form in braces; the linter, the gate and the renderer read the spoken form",
+      "ref": "file:docs/roadmap.md#voice-tone-brightness-air-body"
+    },
+    {
+      "claim": "The marker was first used in a render on 2026-11-14 and the owner confirmed by ear that the marked words came out as intended",
+      "ref": "outline:748cc9d8-4384-47eb-bb7a-261ac21d480b"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-14T14:54:24-07:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-14T22:01:20Z"
+  },
+  "memory_ref": "outline:fca0b09c-2ea6-496f-bb63-8653847aad41"
+}

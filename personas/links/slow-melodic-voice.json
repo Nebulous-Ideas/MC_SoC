@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "slow-melodic-voice",
+  "voice": "am_michael",
+  "card": "slow-melodic",
+  "beat": null,
+  "settings": null,
+  "note": "No production settings tuned yet; the card's bands are the target."
+}

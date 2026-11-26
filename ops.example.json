@@ -1,0 +1,10 @@
+{
+  "checks": [
+    {"name": "records verify clean", "type": "verify"},
+    {"name": "local LLM server answers", "type": "http", "url": "http://192.0.2.10:11435/v1/models", "required": false},
+    {"name": "Outline reachable and token works", "type": "http", "url": "https://outline.example.org/api/auth.info", "bearer_env": "OUTLINE_API_TOKEN", "expect": [200, 405], "required": false},
+    {"name": "GitLab web reachable", "type": "http", "url": "https://gitlab.example.org/users/sign_in", "expect": [200, 399], "required": false},
+    {"name": "GitLab SSH reachable", "type": "tcp", "host": "gitlab.example.org", "port": 22, "required": false},
+    {"name": "disk space where this runs", "type": "disk", "path": "/", "max_used_pct": 90}
+  ]
+}

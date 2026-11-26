@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "history-mcp-schema-overhead",
+  "memory_ref": "outline:27b7d5c2-b0d7-432d-8e28-3260cc0f8ef5",
+  "source": {
+    "kind": "history",
+    "system": "outline",
+    "ref": "claude-config:~/.claude/CLAUDE.md#mcp-enablement",
+    "observed_at": "2026-08-27T00:00:00-07:00"
+  },
+  "what_happened": "A small local model was asked to do a simple documentation update and failed again and again. Every request carried the tool descriptions of every connected helper service, and together they pushed each request past 100k tokens, even after compaction. The model's window was under 50k. The helpers were not broken; there were just too many of them in the room.",
+  "lesson": "Every tool you leave switched on is paid for on every single turn. Turn on only what the task needs, do the task, turn it off again.",
+  "tags": [
+    "homelab",
+    "mcp",
+    "context-budget"
+  ],
+  "form_hint": [
+    "skit",
+    "spoken-rhyme"
+  ],
+  "evidence": [
+    {
+      "claim": "With the full set of MCP servers enabled, requests never dropped below about 102k tokens even after compaction",
+      "ref": "claude-config:~/.claude/CLAUDE.md#mcp-enablement"
+    },
+    {
+      "claim": "The local model's context slot was 49,152 tokens",
+      "ref": "claude-config:~/.claude/CLAUDE.md#mcp-enablement"
+    },
+    {
+      "claim": "The house rule since then is to enable only the servers a task needs",
+      "ref": "claude-config:~/.claude/CLAUDE.md#mcp-enablement"
+    }
+  ],
+  "redaction": {
+    "status": "passed",
+    "method": "by-value scan with verify.py: no credentials, hosts or addresses",
+    "checked_at": "2026-11-11T12:00:00-08:00"
+  },
+  "signoff": {
+    "status": "approved",
+    "by": "maintainer",
+    "channel": "chat",
+    "at": "2026-11-11T19:19:30Z",
+    "note_model": "Approved - lesson about MCP schema overhead is valid and well-documented"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Feedback",
+  "description": "A review comment, reaction or correction about a lesson or a derived work. The text is DATA: it is stored, scanned for secrets and counted, and never executed or fed to a model as instructions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "target", "kind", "text", "by", "at"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "target": {"type": "string", "description": "id of a lesson record or derived work"},
+    "kind": {"enum": ["comment", "reaction", "correction"]},
+    "signal": {"enum": ["keep", "drop", "change", "more-like-this", "less-like-this"], "description": "optional coarse signal Decide may count"},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "text": {"type": "string"},
+    "by": {"type": "string", "minLength": 1},
+    "at": {"type": "string", "format": "date-time"}
+  }
+}
